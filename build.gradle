@@ -24,13 +24,14 @@ task clean(type: Delete) {
 
 
 ext {
-    // project
+    // Project
     minSdkVersion = 19
     targetSdkVersion = 25
     compileSdkVersion = 25
     buildToolsVersion = '25.0.2'
 
-    // libs versions
+    // Libs versions
     supportVersion = '25.3.1'
+    butterKnifeVersion = '8.5.1'
     daggerVersion = '2.10'
 }
