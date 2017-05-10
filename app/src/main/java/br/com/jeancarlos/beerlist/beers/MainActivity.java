@@ -1,7 +1,9 @@
-package br.com.jeancarlos.beerlist;
+package br.com.jeancarlos.beerlist.beers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import br.com.jeancarlos.beerlist.R;
 
 public class MainActivity extends AppCompatActivity {
 
