@@ -32,4 +32,5 @@ ext {
 
     // libs versions
     supportVersion = '25.3.1'
+    daggerVersion = '2.10'
 }
