@@ -11,14 +11,14 @@ import br.com.jeancarlos.beerlist.App;
 import br.com.jeancarlos.beerlist.base.BaseActivity;
 import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
-import br.com.jeancarlos.beerlist.beerslist.presentation.BeersContract;
+import br.com.jeancarlos.beerlist.beerslist.presentation.BeersListContract;
 import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.BeersPresenter;
 import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.BeerPresenterModule;
 import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.DaggerBeerComponent;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements BeersContract.View {
+public class MainActivity extends BaseActivity implements BeersListContract.View {
 
     @BindView(R.id.recycler_view_beers)
     RecyclerView mRecyclerViewBeers;
@@ -36,13 +36,14 @@ public class MainActivity extends BaseActivity implements BeersContract.View {
         DaggerBeerComponent.builder()
                 .beerRepositoryComponent(App.getBeerRepositoryComponent())
                 .beerPresenterModule(new BeerPresenterModule(this))
-                .build();
+                .build()
+                .inject(this);
 
         mBeersPresenter.start();
     }
 
     @Override
-    public void setPresenter(BeersContract.Presenter presenter) {
+    public void setPresenter(BeersListContract.Presenter presenter) {
 
     }
 

@@ -2,7 +2,7 @@ package br.com.jeancarlos.beerlist.beerslist.presentation.presenters;
 
 import javax.inject.Inject;
 
-import br.com.jeancarlos.beerlist.beerslist.presentation.BeersContract;
+import br.com.jeancarlos.beerlist.beerslist.presentation.BeersListContract;
 import br.com.jeancarlos.beerlist.data.BeersRepository;
 
 /**
@@ -12,13 +12,13 @@ import br.com.jeancarlos.beerlist.data.BeersRepository;
  * @since 5/10/17
  */
 
-public class BeersPresenter implements BeersContract.Presenter {
+public class BeersPresenter implements BeersListContract.Presenter {
 
     private BeersRepository mBeerRepository;
-    private BeersContract.View mView;
+    private BeersListContract.View mView;
 
     @Inject
-    BeersPresenter(BeersRepository beersRepository, BeersContract.View view) {
+    BeersPresenter(BeersRepository beersRepository, BeersListContract.View view) {
         mBeerRepository = beersRepository;
         mView = view;
     }

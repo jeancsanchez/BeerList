@@ -13,7 +13,7 @@ import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
  * @since 5/10/17.
  */
 
-public interface BeersContract {
+public interface BeersListContract {
     interface View extends BaseView<Presenter> {
         void setLoadingIndicator(boolean active);
 

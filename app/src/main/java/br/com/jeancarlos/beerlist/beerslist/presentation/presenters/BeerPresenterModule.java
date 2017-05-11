@@ -1,6 +1,6 @@
 package br.com.jeancarlos.beerlist.beerslist.presentation.presenters;
 
-import br.com.jeancarlos.beerlist.beerslist.presentation.BeersContract;
+import br.com.jeancarlos.beerlist.beerslist.presentation.BeersListContract;
 import dagger.Module;
 import dagger.Provides;
 
@@ -14,14 +14,14 @@ import dagger.Provides;
 
 @Module
 public class BeerPresenterModule {
-    private final BeersContract.View mView;
+    private final BeersListContract.View mView;
 
-    public BeerPresenterModule(BeersContract.View view) {
+    public BeerPresenterModule(BeersListContract.View view) {
         this.mView = view;
     }
 
     @Provides
-    BeersPresenter providesBeerPresenter() {
-        return new BeersPresenter(null, mView);
+    BeersListContract.View providesBeerListView() {
+        return mView;
     }
 }
