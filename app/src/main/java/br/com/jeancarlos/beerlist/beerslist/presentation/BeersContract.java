@@ -1,10 +1,10 @@
-package br.com.jeancarlos.beerlist.beers.presentation;
+package br.com.jeancarlos.beerlist.beerslist.presentation;
 
 import java.util.List;
 
-import br.com.jeancarlos.beerlist.BasePresenter;
-import br.com.jeancarlos.beerlist.BaseView;
-import br.com.jeancarlos.beerlist.beers.domain.model.Beer;
+import br.com.jeancarlos.beerlist.base.BasePresenter;
+import br.com.jeancarlos.beerlist.base.BaseView;
+import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
 
 /**
  * This interface represents the contract between the view and the presenter.

@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist;
+package br.com.jeancarlos.beerlist.base;
 
 /**
  * This interface represents a base of methods for all Presenters.

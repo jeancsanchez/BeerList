@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist.beers.domain.model;
+package br.com.jeancarlos.beerlist.beerslist.domain.model;
 
 /**
  * This class represents a POJO model for Beers Entities

@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist.beers.presentation.ui;
+package br.com.jeancarlos.beerlist.beerslist.presentation.ui;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -8,11 +8,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.jeancarlos.beerlist.App;
-import br.com.jeancarlos.beerlist.BaseActivity;
+import br.com.jeancarlos.beerlist.base.BaseActivity;
 import br.com.jeancarlos.beerlist.R;
-import br.com.jeancarlos.beerlist.beers.domain.model.Beer;
-import br.com.jeancarlos.beerlist.beers.presentation.BeersContract;
-import br.com.jeancarlos.beerlist.beers.presentation.presenters.BeerPresenter;
+import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
+import br.com.jeancarlos.beerlist.beerslist.presentation.BeersContract;
+import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.BeersPresenter;
+import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.BeerPresenterModule;
+import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.DaggerBeerComponent;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -22,7 +24,7 @@ public class MainActivity extends BaseActivity implements BeersContract.View {
     RecyclerView mRecyclerViewBeers;
 
     @Inject
-    BeerPresenter mBeersPresenter;
+    BeersPresenter mBeersPresenter;
 
 
     @Override
@@ -30,7 +32,12 @@ public class MainActivity extends BaseActivity implements BeersContract.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        App.getBeerPresenterComponent().inject(this);
+
+        DaggerBeerComponent.builder()
+                .beerRepositoryComponent(App.getBeerRepositoryComponent())
+                .beerPresenterModule(new BeerPresenterModule(this))
+                .build();
+
         mBeersPresenter.start();
     }
 

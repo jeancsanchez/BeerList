@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist;
+package br.com.jeancarlos.beerlist.base;
 
 import android.support.v7.app.AppCompatActivity;
 

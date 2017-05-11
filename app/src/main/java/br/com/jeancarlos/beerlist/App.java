@@ -2,8 +2,8 @@ package br.com.jeancarlos.beerlist;
 
 import android.app.Application;
 
-import br.com.jeancarlos.beerlist.beers.presentation.presenters.BeerPresenterComponent;
-import br.com.jeancarlos.beerlist.beers.presentation.presenters.DaggerBeerPresenterComponent;
+import br.com.jeancarlos.beerlist.data.BeerRepositoryComponent;
+import br.com.jeancarlos.beerlist.data.DaggerBeerRepositoryComponent;
 
 /**
  * @author jeancarlos
@@ -11,7 +11,7 @@ import br.com.jeancarlos.beerlist.beers.presentation.presenters.DaggerBeerPresen
  */
 
 public class App extends Application {
-    private static BeerPresenterComponent mBeerPresenterComponent;
+    private static BeerRepositoryComponent mBeerRepositoryComponent;
 
     @Override
     public void onCreate() {
@@ -20,14 +20,14 @@ public class App extends Application {
     }
 
     private void initDaggerComponents() {
-        mBeerPresenterComponent = DaggerBeerPresenterComponent
+        mBeerRepositoryComponent = DaggerBeerRepositoryComponent
                 .builder()
+                .applicationModule(new ApplicationModule(getApplicationContext()))
                 .build();
     }
 
 
-    public static BeerPresenterComponent getBeerPresenterComponent() {
-        return mBeerPresenterComponent;
+    public static BeerRepositoryComponent getBeerRepositoryComponent() {
+        return mBeerRepositoryComponent;
     }
-
 }
