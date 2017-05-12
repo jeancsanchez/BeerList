@@ -1,5 +1,7 @@
 package br.com.jeancarlos.beerlist.data;
 
+import android.support.annotation.NonNull;
+
 import javax.inject.Inject;
 
 /**
@@ -18,8 +20,7 @@ public class BeersRepository implements BeersDataSource {
     }
 
     @Override
-    public void fetchBeers() {
-        mRemoteBeers.fetchBeers();
-        mLocalBeers.fetchBeers();
+    public void fetchBeers(@NonNull FetchBeersCallback callback) {
+        mRemoteBeers.fetchBeers(callback);
     }
 }

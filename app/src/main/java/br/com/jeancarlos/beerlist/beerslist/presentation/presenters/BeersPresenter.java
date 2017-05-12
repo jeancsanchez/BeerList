@@ -1,8 +1,12 @@
 package br.com.jeancarlos.beerlist.beerslist.presentation.presenters;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
 import br.com.jeancarlos.beerlist.beerslist.presentation.BeersListContract;
+import br.com.jeancarlos.beerlist.data.BeersDataSource;
 import br.com.jeancarlos.beerlist.data.BeersRepository;
 
 /**
@@ -26,6 +30,20 @@ public class BeersPresenter implements BeersListContract.Presenter {
 
     @Override
     public void start() {
+        mBeerRepository.fetchBeers(new BeersDataSource.FetchBeersCallback() {
+            @Override
+            public void onBeersFetched(List<Beer> beers) {
+                mView.showBeers(beers);
+            }
 
+            @Override
+            public void onBeersNotAvailable() {
+
+            }
+
+            @Override
+            public void onBeersFetchError() {
+            }
+        });
     }
 }

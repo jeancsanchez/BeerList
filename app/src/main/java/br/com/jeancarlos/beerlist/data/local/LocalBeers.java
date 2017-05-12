@@ -18,12 +18,12 @@ public class LocalBeers implements BeersDataSource {
     private Context context;
 
     @Inject
-    LocalBeers(@NonNull Context context){
+    LocalBeers(@NonNull Context context) {
 
     }
 
     @Override
-    public void fetchBeers() {
+    public void fetchBeers(FetchBeersCallback callback) {
 
     }
 }

@@ -1,5 +1,9 @@
 package br.com.jeancarlos.beerlist.data;
 
+import android.support.annotation.NonNull;
+
+import java.util.List;
+
 import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
 
 /**
@@ -11,6 +15,14 @@ import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
  */
 
 public interface BeersDataSource {
+    interface FetchBeersCallback {
 
-    void fetchBeers();
+        void onBeersFetched(List<Beer> beers);
+
+        void onBeersNotAvailable();
+
+        void onBeersFetchError();
+    }
+
+    void fetchBeers(@NonNull FetchBeersCallback callback);
 }
