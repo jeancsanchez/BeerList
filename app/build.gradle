@@ -46,7 +46,7 @@ dependencies {
 
     // Others
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
 
     // Tests
     // Dependencies for local unit tests

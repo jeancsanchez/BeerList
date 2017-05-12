@@ -9,6 +9,5 @@ package br.com.jeancarlos.beerlist.base;
 
 public interface BaseView<T> {
 
-    void setPresenter(T presenter);
 }
 

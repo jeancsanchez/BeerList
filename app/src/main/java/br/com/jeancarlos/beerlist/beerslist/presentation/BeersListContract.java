@@ -14,7 +14,9 @@ import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
  */
 
 public interface BeersListContract {
+
     interface View extends BaseView<Presenter> {
+
         void setLoadingIndicator(boolean active);
 
         void showBeers(List<Beer> beers);

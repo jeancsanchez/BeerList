@@ -15,6 +15,9 @@ import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
  */
 
 public interface BeersDataSource {
+
+    void fetchBeers(@NonNull FetchBeersCallback callback);
+
     interface FetchBeersCallback {
 
         void onBeersFetched(List<Beer> beers);
@@ -23,6 +26,4 @@ public interface BeersDataSource {
 
         void onBeersFetchError();
     }
-
-    void fetchBeers(@NonNull FetchBeersCallback callback);
 }
