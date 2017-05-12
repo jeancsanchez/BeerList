@@ -38,15 +38,14 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKnifeVersion"
 
     // Dagger2
-    dependencies {
-        compile "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
-        compile "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
-        annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
-    }
+    compile "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
+    compile "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
 
     // Others
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 
     // Tests
     // Dependencies for local unit tests

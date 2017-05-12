@@ -1,8 +1,8 @@
 package br.com.jeancarlos.beerlist.beerslist.presentation.ui;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import java.util.List;
 
@@ -27,6 +27,8 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     @Inject
     BeersPresenter mBeersPresenter;
 
+    private BeerAdapter mBeerAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,18 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
                 .build()
                 .inject(this);
 
+        createAdapter();
+    }
+
+    /**
+     * Create an adapter for manipulate beers list on {@link RecyclerView}
+     */
+    private void createAdapter() {
+        mBeerAdapter = new BeerAdapter(MainActivity.this);
+        mRecyclerViewBeers.setLayoutManager(
+                new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
+
+        mRecyclerViewBeers.setAdapter(mBeerAdapter);
     }
 
 
@@ -51,9 +65,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
     @Override
     public void showBeers(List<Beer> beers) {
-        for (Beer beer : beers) {
-            Log.d(getClass().getSimpleName(), beer.getName());
-        }
+        mBeerAdapter.setupBeers(beers);
     }
 
 
