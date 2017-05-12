@@ -3,7 +3,7 @@ package br.com.jeancarlos.beerlist.data;
 import javax.inject.Inject;
 
 /**
- * @author jeancarlos
+ * @author Jean Carlos
  * @since 5/10/17
  */
 
@@ -19,6 +19,7 @@ public class BeersRepository implements BeersDataSource {
 
     @Override
     public void fetchBeers() {
-
+        mRemoteBeers.fetchBeers();
+        mLocalBeers.fetchBeers();
     }
 }
