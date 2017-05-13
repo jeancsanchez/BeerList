@@ -1,12 +1,9 @@
 package br.com.jeancarlos.beerlist.beerslist.presentation.ui;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
 
 import java.util.List;
 
@@ -49,6 +46,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
                 .inject(this);
 
         createAdapter();
+        mBeersPresenter.start();
     }
 
     /**
@@ -57,9 +55,9 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     private void createAdapter() {
         mBeerAdapter = new BeerAdapter(MainActivity.this);
         mBeerAdapter.setOnBeerItemClickedListener(MainActivity.this);
+
         mRecyclerViewBeers.setLayoutManager(
                 new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
-
         mRecyclerViewBeers.setAdapter(mBeerAdapter);
     }
 
@@ -79,24 +77,12 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     public void beerClicked(Beer beer) {
         Intent intent = new Intent(this, BeersDetailActivity.class);
         intent.putExtra(BeerHelper.KEY_BEER, beer);
-
-        // Makes a shared element animation
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            ImageView imageViewItemBeer = (ImageView) findViewById(R.id.image_cover);
-
-            ActivityOptions options = ActivityOptions
-                    .makeSceneTransitionAnimation(MainActivity.this, imageViewItemBeer, "transition_name_image_beer");
-
-            startActivity(intent, options.toBundle());
-
-        } else {
-            startActivity(intent);
-        }
+        startActivity(intent);
     }
+
 
     @Override
     public void onResume() {
         super.onResume();
-        mBeersPresenter.start();
     }
 }
