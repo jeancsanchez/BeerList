@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.jeancarlos.beerlist">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -13,7 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".beerslist.presentation.ui.MainActivity" />
-        <activity android:name=".beersdetail.BeersDetailActivity" />
+        <activity
+            android:name=".beersdetail.BeersDetailActivity"
+            android:parentActivityName=".beerslist.presentation.ui.MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".beerslist.presentation.ui.MainActivity" />
+        </activity>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">

@@ -1,6 +1,8 @@
 package br.com.jeancarlos.beerlist.beerslist.presentation.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -11,6 +13,7 @@ import javax.inject.Inject;
 import br.com.jeancarlos.beerlist.App;
 import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.base.BaseActivity;
+import br.com.jeancarlos.beerlist.beersdetail.BeersDetailActivity;
 import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
 import br.com.jeancarlos.beerlist.beerslist.presentation.BeersListContract;
 import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.BeerPresenterModule;
@@ -19,7 +22,7 @@ import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.DaggerBeerCo
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements BeersListContract.View {
+public class MainActivity extends BaseActivity implements BeersListContract.View, OnBeerItemClickedListener {
 
     @BindView(R.id.recycler_view_beers)
     RecyclerView mRecyclerViewBeers;
@@ -51,6 +54,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
      */
     private void createAdapter() {
         mBeerAdapter = new BeerAdapter(MainActivity.this);
+        mBeerAdapter.setOnBeerItemClickedListener(MainActivity.this);
         mRecyclerViewBeers.setLayoutManager(
                 new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
 
@@ -73,5 +77,12 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     public void onResume() {
         super.onResume();
         mBeersPresenter.start();
+    }
+
+    @Override
+    public void beerClicked(Beer beer) {
+        Intent intent = new Intent(this, BeersDetailActivity.class);
+        intent.putExtra(BeerHelper.KEY_BEER, beer);
+        startActivity(intent);
     }
 }

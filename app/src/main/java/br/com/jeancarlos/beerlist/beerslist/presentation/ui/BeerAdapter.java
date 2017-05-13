@@ -25,9 +25,9 @@ import butterknife.ButterKnife;
  */
 
 public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder> {
-
     private final Context context;
     private List<Beer> beerList;
+    private OnBeerItemClickedListener mOnBeerClickListener;
 
     public BeerAdapter(Context context) {
         this.context = context;
@@ -44,9 +44,13 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
         return new BeerViewHolder(view);
     }
 
+    public void setOnBeerItemClickedListener(OnBeerItemClickedListener onBeerItemClickedListener) {
+        this.mOnBeerClickListener = onBeerItemClickedListener;
+    }
+
     @Override
     public void onBindViewHolder(BeerViewHolder holder, int position) {
-        Beer beerItem = beerList.get(position);
+        final Beer beerItem = beerList.get(position);
 
         // Load beer's cover image
         Picasso.with(context)
@@ -56,6 +60,13 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
 
         holder.mTextViewBeerTitle.setText(beerItem.getName());
         holder.mTextViewBeerSubTitle.setText(beerItem.getTagLine());
+
+        holder.containerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnBeerClickListener != null) mOnBeerClickListener.beerClicked(beerItem);
+            }
+        });
     }
 
     @Override
@@ -73,12 +84,13 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
         @BindView(R.id.text_beer_subtitle)
         TextView mTextViewBeerSubTitle;
 
-        View itemView;
+        View containerView;
 
         public BeerViewHolder(View itemView) {
             super(itemView);
-            this.itemView = itemView;
             ButterKnife.bind(this, itemView);
+
+            this.containerView = itemView;
         }
     }
 }
