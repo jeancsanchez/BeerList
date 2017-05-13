@@ -1,16 +1,14 @@
 package br.com.jeancarlos.beerlist.beerslist.presentation.ui;
 
 import android.app.SearchManager;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v4.view.MenuItemCompat;
-import android.view.MenuItem;
-import android.widget.SearchView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+
 import android.view.Menu;
 
 import java.util.List;
@@ -113,10 +111,6 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
         SearchView searchView = (SearchView) menu.findItem(R.id.search_view_beers).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
-        // Opens search input text automatically
-        searchView.setIconifiedByDefault(false);
-
-        searchView.setIconified(false);
         searchView.setQueryHint(getResources().getString(R.string.title_search_view_beer));
         searchView.setOnQueryTextListener(this);
 
