@@ -21,6 +21,7 @@ public interface BeersListContract {
 
         void showBeers(List<Beer> beers);
 
+        void showConnectionFailedError();
     }
 
     interface Presenter extends BasePresenter {

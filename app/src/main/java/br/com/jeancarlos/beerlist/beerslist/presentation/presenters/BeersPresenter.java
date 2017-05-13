@@ -43,6 +43,7 @@ public class BeersPresenter implements BeersListContract.Presenter {
 
             @Override
             public void onBeersFetchError() {
+                mView.showConnectionFailedError();
             }
         });
     }
