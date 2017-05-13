@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Beer List</string>
     <string name="beer_image_description">Beer image</string>
+    <string name="go_beer_detail_icon">Go Beer datail icon</string>
 </resources>
