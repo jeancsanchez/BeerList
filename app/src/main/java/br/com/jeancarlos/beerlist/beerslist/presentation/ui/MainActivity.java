@@ -76,12 +76,6 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mBeersPresenter.start();
-    }
-
-    @Override
     public void beerClicked(Beer beer) {
         Intent intent = new Intent(this, BeersDetailActivity.class);
         intent.putExtra(BeerHelper.KEY_BEER, beer);
@@ -98,5 +92,11 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
         } else {
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mBeersPresenter.start();
     }
 }
