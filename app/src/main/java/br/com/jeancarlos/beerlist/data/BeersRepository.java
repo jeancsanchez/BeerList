@@ -7,6 +7,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
+import br.com.jeancarlos.beerlist.data.local.Local;
+import br.com.jeancarlos.beerlist.data.remote.Remote;
 
 /**
  * @author Jean Carlos

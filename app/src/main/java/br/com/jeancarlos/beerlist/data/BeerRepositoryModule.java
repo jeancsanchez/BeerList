@@ -2,7 +2,9 @@ package br.com.jeancarlos.beerlist.data;
 
 import javax.inject.Singleton;
 
+import br.com.jeancarlos.beerlist.data.local.Local;
 import br.com.jeancarlos.beerlist.data.local.LocalBeers;
+import br.com.jeancarlos.beerlist.data.remote.Remote;
 import br.com.jeancarlos.beerlist.data.remote.RemoteBeers;
 import dagger.Binds;
 import dagger.Module;
