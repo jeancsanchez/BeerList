@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="go_beer_detail_icon">Ícone para ir para o detalhe da cerveja</string>
+    <string name="message_connection_error">A lista atual talvez esteja desatualizada. Verifique sua conexão.</string>
+    <string name="title_search_view_beer">Procurar cerveja</string>
+</resources>

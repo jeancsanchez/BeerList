@@ -3,4 +3,5 @@
     <string name="beer_image_description">Beer image</string>
     <string name="go_beer_detail_icon">Go Beer detail icon</string>
     <string name="message_connection_error">The current list maybe is out of the date. Verify your connection</string>
+    <string name="title_search_view_beer">Search Beer</string>
 </resources>
