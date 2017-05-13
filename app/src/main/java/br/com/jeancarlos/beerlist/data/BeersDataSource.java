@@ -18,6 +18,9 @@ public interface BeersDataSource {
 
     void fetchBeers(@NonNull FetchBeersCallback callback);
 
+    void saveBeers(List<Beer> beers);
+
+
     interface FetchBeersCallback {
 
         void onBeersFetched(List<Beer> beers);

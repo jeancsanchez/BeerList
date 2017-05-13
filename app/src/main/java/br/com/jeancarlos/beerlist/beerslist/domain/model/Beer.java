@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * This class represents a model for Beers
  * <p>
@@ -16,7 +19,8 @@ import com.google.gson.annotations.SerializedName;
  * @since 5/10/17
  */
 
-public class Beer implements Parcelable {
+public class Beer extends RealmObject implements Parcelable {
+
     public static final Creator<Beer> CREATOR = new Creator<Beer>() {
         @Override
         public Beer createFromParcel(Parcel in) {
@@ -29,7 +33,8 @@ public class Beer implements Parcelable {
             return new Beer[size];
         }
     };
-    private double id;
+    @PrimaryKey
+    private int id;
     private String name;
     @SerializedName("tagline")
     private String tagLine;
@@ -38,9 +43,13 @@ public class Beer implements Parcelable {
     @SerializedName("image_url")
     private String imageUrl;
 
+    // Default constructor
+    public Beer() {
+    }
+
     /* Parcelable implementation - BEGIN */
     protected Beer(Parcel in) {
-        id = in.readDouble();
+        id = in.readInt();
         name = in.readString();
         tagLine = in.readString();
         description = in.readString();
@@ -51,7 +60,7 @@ public class Beer implements Parcelable {
         return id;
     }
 
-    public void setId(double id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -78,7 +87,7 @@ public class Beer implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeDouble(id);
+        dest.writeInt(id);
         dest.writeString(name);
         dest.writeString(tagLine);
         dest.writeString(description);

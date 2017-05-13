@@ -47,4 +47,9 @@ public class RemoteBeers implements BeersDataSource {
                     }
                 });
     }
+
+    @Override
+    public void saveBeers(List<Beer> beers) {
+
+    }
 }

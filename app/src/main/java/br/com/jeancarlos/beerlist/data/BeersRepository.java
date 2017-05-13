@@ -2,7 +2,11 @@ package br.com.jeancarlos.beerlist.data;
 
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 import javax.inject.Inject;
+
+import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
 
 /**
  * @author Jean Carlos
@@ -20,7 +24,34 @@ public class BeersRepository implements BeersDataSource {
     }
 
     @Override
-    public void fetchBeers(@NonNull FetchBeersCallback callback) {
-        mRemoteBeers.fetchBeers(callback);
+    public void fetchBeers(@NonNull final FetchBeersCallback callback) {
+        // Fetch locally first
+        mLocalBeers.fetchBeers(callback);
+
+
+        mRemoteBeers.fetchBeers(new FetchBeersCallback() {
+            @Override
+            public void onBeersFetched(List<Beer> beers) {
+                callback.onBeersFetched(beers);
+
+                // Save locally
+                saveBeers(beers);
+            }
+
+            @Override
+            public void onBeersNotAvailable() {
+                callback.onBeersNotAvailable();
+            }
+
+            @Override
+            public void onBeersFetchError() {
+                callback.onBeersFetchError();
+            }
+        });
+    }
+
+    @Override
+    public void saveBeers(List<Beer> beers) {
+        mLocalBeers.saveBeers(beers);
     }
 }
