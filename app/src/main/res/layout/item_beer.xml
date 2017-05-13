@@ -16,6 +16,7 @@
         android:layout_marginTop="0dp"
         android:contentDescription="@string/beer_image_description"
         android:paddingTop="5dp"
+        android:transitionName="transition_name_image_beer"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

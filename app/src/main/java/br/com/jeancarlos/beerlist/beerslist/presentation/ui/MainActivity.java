@@ -1,10 +1,12 @@
 package br.com.jeancarlos.beerlist.beerslist.presentation.ui;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ import javax.inject.Inject;
 import br.com.jeancarlos.beerlist.App;
 import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.base.BaseActivity;
-import br.com.jeancarlos.beerlist.beersdetail.BeersDetailActivity;
+import br.com.jeancarlos.beerlist.beersdetail.presentation.BeersDetailActivity;
 import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
 import br.com.jeancarlos.beerlist.beerslist.presentation.BeersListContract;
 import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.BeerPresenterModule;
@@ -83,6 +85,18 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     public void beerClicked(Beer beer) {
         Intent intent = new Intent(this, BeersDetailActivity.class);
         intent.putExtra(BeerHelper.KEY_BEER, beer);
-        startActivity(intent);
+
+        // Makes a shared element animation
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ImageView imageViewItemBeer = (ImageView) findViewById(R.id.image_cover);
+
+            ActivityOptions options = ActivityOptions
+                    .makeSceneTransitionAnimation(MainActivity.this, imageViewItemBeer, "transition_name_image_beer");
+
+            startActivity(intent, options.toBundle());
+
+        } else {
+            startActivity(intent);
+        }
     }
 }

@@ -6,12 +6,16 @@ import br.com.jeancarlos.beerlist.data.BeerRepositoryComponent;
 import br.com.jeancarlos.beerlist.data.DaggerBeerRepositoryComponent;
 
 /**
- * @author jeancarlos
+ * @author Jean Carlos
  * @since 5/10/17
  */
 
 public class App extends Application {
     private static BeerRepositoryComponent mBeerRepositoryComponent;
+
+    public static BeerRepositoryComponent getBeerRepositoryComponent() {
+        return mBeerRepositoryComponent;
+    }
 
     @Override
     public void onCreate() {
@@ -24,10 +28,5 @@ public class App extends Application {
                 .builder()
                 .applicationModule(new ApplicationModule(getApplicationContext()))
                 .build();
-    }
-
-
-    public static BeerRepositoryComponent getBeerRepositoryComponent() {
-        return mBeerRepositoryComponent;
     }
 }
