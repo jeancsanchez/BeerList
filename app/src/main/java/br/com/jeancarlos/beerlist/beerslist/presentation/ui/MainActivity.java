@@ -1,10 +1,17 @@
 package br.com.jeancarlos.beerlist.beerslist.presentation.ui;
 
+import android.app.SearchManager;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v4.view.MenuItemCompat;
+import android.view.MenuItem;
+import android.widget.SearchView;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 
 import java.util.List;
 
@@ -23,7 +30,7 @@ import br.com.jeancarlos.beerlist.util.NetworkUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements BeersListContract.View, OnBeerItemClickedListener {
+public class MainActivity extends BaseActivity implements BeersListContract.View, OnBeerItemClickedListener, SearchView.OnQueryTextListener {
 
     @BindView(R.id.recycler_view_beers)
     RecyclerView mRecyclerViewBeers;
@@ -97,6 +104,46 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
         startActivity(intent);
     }
 
+
+    // Inflates the search options menu on toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search_view_beers).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        // Opens search input text automatically
+        searchView.setIconifiedByDefault(false);
+
+        searchView.setIconified(false);
+        searchView.setQueryHint(getResources().getString(R.string.title_search_view_beer));
+        searchView.setOnQueryTextListener(this);
+
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+        }
+    }
 
     @Override
     public void onResume() {
