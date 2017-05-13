@@ -8,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-
 import android.view.Menu;
 
 import java.util.List;
@@ -124,6 +123,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        mBeerAdapter.performFilter(newText);
         return false;
     }
 

@@ -1,5 +1,9 @@
 package br.com.jeancarlos.beerlist.beerslist.presentation.presenters;
 
+import android.widget.Filter;
+import android.widget.Filterable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
