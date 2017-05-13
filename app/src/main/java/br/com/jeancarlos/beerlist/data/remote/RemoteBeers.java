@@ -49,6 +49,26 @@ public class RemoteBeers implements BeersDataSource {
     }
 
     @Override
+    public void searchBeerByName(String query, @NonNull final SearchBeerCallback callback) {
+        query.replace(" ", "_");
+
+        mRetrofitService.searchBeerByName(query)
+                .enqueue(new Callback<List<Beer>>() {
+                    @Override
+                    public void onResponse(Call<List<Beer>> call, Response<List<Beer>> response) {
+                        if (response.body() != null) {
+                            callback.onSearchBeerSuccess(response.body());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Beer>> call, Throwable t) {
+                        callback.onSearchBeerFailure();
+                    }
+                });
+    }
+
+    @Override
     public void saveBeers(List<Beer> beers) {
 
     }

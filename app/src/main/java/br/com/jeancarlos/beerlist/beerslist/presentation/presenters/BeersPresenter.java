@@ -55,4 +55,19 @@ public class BeersPresenter implements BeersListContract.Presenter {
             }
         });
     }
+
+    @Override
+    public void getBeerByName(String query) {
+        mBeerRepository.searchBeerByName(query, new BeersDataSource.SearchBeerCallback() {
+            @Override
+            public void onSearchBeerSuccess(List<Beer> beers) {
+                mView.showBeersSearchResult(beers);
+            }
+
+            @Override
+            public void onSearchBeerFailure() {
+                // TODO: CALLBACK FOR VIEW
+            }
+        });
+    }
 }

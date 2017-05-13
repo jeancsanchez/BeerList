@@ -53,6 +53,12 @@ public class BeersRepository implements BeersDataSource {
     }
 
     @Override
+    public void searchBeerByName(String query, @NonNull SearchBeerCallback callback) {
+        mRemoteBeers.searchBeerByName(query, callback);
+    }
+
+
+    @Override
     public void saveBeers(List<Beer> beers) {
         mLocalBeers.saveBeers(beers);
     }

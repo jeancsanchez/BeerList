@@ -18,6 +18,8 @@ public interface BeersDataSource {
 
     void fetchBeers(@NonNull FetchBeersCallback callback);
 
+    void searchBeerByName(String query, @NonNull SearchBeerCallback callback);
+
     void saveBeers(List<Beer> beers);
 
 
@@ -28,5 +30,13 @@ public interface BeersDataSource {
         void onBeersNotAvailable();
 
         void onBeersFetchError();
+    }
+
+
+    interface SearchBeerCallback {
+
+        void onSearchBeerSuccess(List<Beer> beers);
+
+        void onSearchBeerFailure();
     }
 }

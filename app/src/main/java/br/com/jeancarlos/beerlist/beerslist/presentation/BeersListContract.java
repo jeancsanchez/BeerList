@@ -21,10 +21,13 @@ public interface BeersListContract {
 
         void showBeers(List<Beer> beers);
 
+        void showBeersSearchResult(List<Beer> beers);
+
         void showConnectionFailedError();
     }
 
     interface Presenter extends BasePresenter {
 
+        void getBeerByName(String query);
     }
 }

@@ -44,6 +44,12 @@ public class LocalBeers implements BeersDataSource {
     }
 
     @Override
+    public void searchBeerByName(String query, @NonNull SearchBeerCallback callback) {
+        // TODO: DO STUFF
+    }
+
+
+    @Override
     public void saveBeers(List<Beer> beers) {
         mRealm.beginTransaction();
         mRealm.insertOrUpdate(beers);

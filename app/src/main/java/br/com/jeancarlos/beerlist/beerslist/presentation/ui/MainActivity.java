@@ -78,6 +78,11 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
         mBeerAdapter.setupBeers(beers);
     }
 
+    @Override
+    public void showBeersSearchResult(List<Beer> beers) {
+        mBeerAdapter.setupBeers(beers);
+    }
+
 
     /**
      * Shows a {@link Snackbar} alerting the user that the data maybe is out of the date, because there is a
@@ -118,6 +123,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        mBeersPresenter.getBeerByName(query);
         return false;
     }
 

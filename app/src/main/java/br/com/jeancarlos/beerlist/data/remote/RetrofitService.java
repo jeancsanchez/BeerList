@@ -7,6 +7,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 /**
  * @author Jean Carlos
@@ -18,6 +19,9 @@ public interface RetrofitService {
 
     @GET("beers")
     Call<List<Beer>> getBeers();
+
+    @GET("beers")
+    Call<List<Beer>> searchBeerByName(@Query("beer_name") String query);
 
     /**
      * This class helps set up a new Retrofit Service
