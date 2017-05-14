@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
     @Override
     public void showBeersSearchResult(List<Beer> beers) {
-        mBeerAdapter.setupBeers(beers);
+        mBeerAdapter.updateBeers(beers);
     }
 
 

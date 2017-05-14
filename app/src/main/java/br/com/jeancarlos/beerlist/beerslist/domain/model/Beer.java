@@ -101,4 +101,9 @@ public class Beer extends RealmObject implements Parcelable {
         if (!(object instanceof Beer)) return false;
         return this.id == ((Beer) object).getId();
     }
+
+    @Override
+    public int hashCode() {
+        return this.id;
+    }
 }

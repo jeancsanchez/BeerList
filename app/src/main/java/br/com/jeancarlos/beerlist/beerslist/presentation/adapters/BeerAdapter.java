@@ -37,12 +37,32 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
         this.mContext = context;
     }
 
-    public void setupBeers(List<Beer> beerList) {
-        this.mBeersList = beerList;
-        this.mOriginalListFilter.addAll(beerList);
+    /**
+     * This method starts the beers list
+     *
+     * @param beersList The beers list
+     */
+    public void setupBeers(List<Beer> beersList) {
+        this.mBeersList = beersList;
+        this.mOriginalListFilter.addAll(beersList);
         notifyDataSetChanged();
     }
 
+    /**
+     * This method updates the beers list when it receives a new list from the search
+     *
+     * @param beersList The beers list
+     */
+    public void updateBeers(List<Beer> beersList) {
+        mBeersList = beersList;
+        notifyDataSetChanged();
+
+        for (Beer beer : beersList) {
+            if (!mOriginalListFilter.contains(beer)) {
+                mOriginalListFilter.add(beer);
+            }
+        }
+    }
 
     @Override
     public BeerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
