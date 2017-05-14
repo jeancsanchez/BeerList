@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import java.util.List;
@@ -101,6 +102,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
         mRecyclerViewBeers.setLayoutManager(
                 new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
+        mRecyclerViewBeers.setItemViewCacheSize(20);
         mRecyclerViewBeers.setAdapter(mBeerAdapter);
     }
 
@@ -109,8 +111,8 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     public void setLoadingIndicator(boolean active) {
         // Hides message data not found error to show progress
         if (active) {
-            if (mLinearMessageNotFound.getVisibility() == LinearLayout.VISIBLE) {
-                mLinearMessageNotFound.setVisibility(LinearLayout.GONE);
+            if (mLinearMessageNotFound.getVisibility() == View.VISIBLE) {
+                mLinearMessageNotFound.setVisibility(View.GONE);
             }
         } else {
             showMessageNoDataFoundIfListIsEmpty();
@@ -172,10 +174,10 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     @Override
     public void showDataNotAvailable() {
         if (mBeerAdapter.getItemCount() == 0) {
-            mLinearMessageNotFound.setVisibility(LinearLayout.VISIBLE);
+            mLinearMessageNotFound.setVisibility(View.VISIBLE);
 
         } else {
-            mLinearMessageNotFound.setVisibility(LinearLayout.GONE);
+            mLinearMessageNotFound.setVisibility(View.GONE);
         }
     }
 
