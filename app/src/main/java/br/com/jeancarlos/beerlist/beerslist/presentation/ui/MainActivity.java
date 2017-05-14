@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
+import android.widget.LinearLayout;
 
 import java.util.List;
 
@@ -41,6 +42,9 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefresh;
 
+    @BindView(R.id.linear_layout_not_found_error)
+    LinearLayout mLinearMessageNotFound;
+
     @Inject
     BeersPresenter mBeersPresenter;
 
@@ -63,7 +67,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     }
 
     /**
-     * Provides all dependencies by Dagger2 injection for this view
+     * This method provides all dependencies by Dagger2 injection for this view
      */
     private void initInjections() {
         // Inject the presenter
@@ -76,7 +80,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
 
     /**
-     * Initialize the refresh layout
+     * This method initialize the refresh layout
      */
     private void setupRefresh() {
         mSwipeRefresh.setColorSchemeColors(getColorPrimary(), getColorPrimaryDark());
@@ -103,24 +107,49 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
     @Override
     public void setLoadingIndicator(boolean active) {
+        // Hides message data not found error to show progress
+        if (active) {
+            if (mLinearMessageNotFound.getVisibility() == LinearLayout.VISIBLE) {
+                mLinearMessageNotFound.setVisibility(LinearLayout.GONE);
+            }
+        } else {
+            showMessageNoDataFoundIfListIsEmpty();
+        }
+
         mSwipeRefresh.setRefreshing(active);
     }
 
     @Override
     public void showBeers(List<Beer> beers) {
         mBeerAdapter.setupBeers(beers);
+
+        if (beers.size() == 0) {
+            showDataNotAvailable();
+        }
     }
 
     @Override
     public void onBeersUpdate(List<Beer> beers) {
         mBeerAdapter.updateList(beers);
+        showDataNotAvailable();
     }
 
     @Override
     public void showBeersSearchResult(List<Beer> beers) {
         mBeerAdapter.updateFilterList(beers);
+
+        if (beers.size() == 0) {
+            showDataNotAvailable();
+        }
     }
 
+    /**
+     * This method just call for {@link #showDataNotAvailable()} method. It is just for more
+     * readable code
+     */
+    private void showMessageNoDataFoundIfListIsEmpty() {
+        showDataNotAvailable();
+    }
 
     /**
      * Shows a {@link Snackbar} alerting the user that the data maybe is out of the date, because there is a
@@ -142,7 +171,12 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
      */
     @Override
     public void showDataNotAvailable() {
+        if (mBeerAdapter.getItemCount() == 0) {
+            mLinearMessageNotFound.setVisibility(LinearLayout.VISIBLE);
 
+        } else {
+            mLinearMessageNotFound.setVisibility(LinearLayout.GONE);
+        }
     }
 
     @Override
@@ -169,12 +203,14 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     public boolean onQueryTextSubmit(String query) {
         mBeersPresenter.getBeerByName(query);
         saveRecentQuery(query);
+        showMessageNoDataFoundIfListIsEmpty();
         return true;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
         mBeerAdapter.performFilter(newText);
+        showMessageNoDataFoundIfListIsEmpty();
         return false;
     }
 
