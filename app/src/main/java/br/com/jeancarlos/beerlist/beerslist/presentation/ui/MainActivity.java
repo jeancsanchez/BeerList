@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -26,8 +27,8 @@ import br.com.jeancarlos.beerlist.beerslist.presentation.adapters.BeerAdapter;
 import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.BeerPresenterModule;
 import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.BeersPresenter;
 import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.DaggerBeerComponent;
-import br.com.jeancarlos.beerlist.util.SuggestionProvider;
 import br.com.jeancarlos.beerlist.util.NetworkUtil;
+import br.com.jeancarlos.beerlist.util.SuggestionProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -36,6 +37,9 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
     @BindView(R.id.recycler_view_beers)
     RecyclerView mRecyclerViewBeers;
+
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout mSwipeRefresh;
 
     @Inject
     BeersPresenter mBeersPresenter;
@@ -49,18 +53,39 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
 
+        ButterKnife.bind(this);
+        initInjections();
+        handleIntent(getIntent());
+        createAdapter();
+        setupRefresh();
+        mBeersPresenter.start();
+    }
+
+    /**
+     * Provides all dependencies by Dagger2 injection for this view
+     */
+    private void initInjections() {
         // Inject the presenter
         DaggerBeerComponent.builder()
                 .beerRepositoryComponent(App.getBeerRepositoryComponent())
                 .beerPresenterModule(new BeerPresenterModule(this))
                 .build()
                 .inject(this);
+    }
 
-        handleIntent(getIntent());
-        createAdapter();
-        mBeersPresenter.start();
+
+    /**
+     * Initialize the refresh layout
+     */
+    private void setupRefresh() {
+        mSwipeRefresh.setColorSchemeColors(getColorPrimary(), getColorPrimaryDark());
+        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mBeersPresenter.refreshBeers();
+            }
+        });
     }
 
     /**
@@ -78,7 +103,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
     @Override
     public void setLoadingIndicator(boolean active) {
-
+        mSwipeRefresh.setRefreshing(active);
     }
 
     @Override
@@ -87,8 +112,13 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     }
 
     @Override
+    public void onBeersUpdate(List<Beer> beers) {
+        mBeerAdapter.updateList(beers);
+    }
+
+    @Override
     public void showBeersSearchResult(List<Beer> beers) {
-        mBeerAdapter.updateBeers(beers);
+        mBeerAdapter.updateFilterList(beers);
     }
 
 
@@ -107,6 +137,14 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
         }
     }
 
+    /**
+     * Displays a message indicating that there is no data available
+     */
+    @Override
+    public void showDataNotAvailable() {
+
+    }
+
     @Override
     public void beerClicked(Beer beer) {
         Intent intent = new Intent(this, BeersDetailActivity.class);
@@ -114,8 +152,6 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
         startActivity(intent);
     }
 
-
-    // Inflates the search options menu on toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.options_menu, menu);

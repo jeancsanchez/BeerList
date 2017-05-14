@@ -1,9 +1,5 @@
 package br.com.jeancarlos.beerlist.beerslist.presentation.presenters;
 
-import android.widget.Filter;
-import android.widget.Filterable;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -38,26 +34,33 @@ public class BeersPresenter implements BeersListContract.Presenter {
 
     @Override
     public void start() {
+        mView.setLoadingIndicator(true);
+
         mBeerRepository.fetchBeers(new BeersDataSource.FetchBeersCallback() {
             @Override
             public void onBeersFetched(List<Beer> beers) {
                 mView.showBeers(beers);
+                mView.setLoadingIndicator(false);
             }
 
             @Override
             public void onBeersNotAvailable() {
-
+                mView.showConnectionFailedError();
+                mView.setLoadingIndicator(false);
             }
 
             @Override
             public void onBeersFetchError() {
                 mView.showConnectionFailedError();
+                mView.setLoadingIndicator(false);
             }
         });
     }
 
     @Override
     public void getBeerByName(String query) {
+        mView.setLoadingIndicator(true);
+
         // Normalize query String
         query = query.replaceAll(" ", "_").toLowerCase();
 
@@ -65,11 +68,38 @@ public class BeersPresenter implements BeersListContract.Presenter {
             @Override
             public void onSearchBeerSuccess(List<Beer> beers) {
                 mView.showBeersSearchResult(beers);
+                mView.setLoadingIndicator(false);
             }
 
             @Override
             public void onSearchBeerFailure() {
-                // TODO: CALLBACK FOR VIEW
+                mView.showConnectionFailedError();
+                mView.setLoadingIndicator(false);
+            }
+        });
+    }
+
+    @Override
+    public void refreshBeers() {
+        mView.setLoadingIndicator(true);
+
+        mBeerRepository.fetchBeers(new BeersDataSource.FetchBeersCallback() {
+            @Override
+            public void onBeersFetched(List<Beer> beers) {
+                mView.onBeersUpdate(beers);
+                mView.setLoadingIndicator(false);
+            }
+
+            @Override
+            public void onBeersNotAvailable() {
+                mView.showConnectionFailedError();
+                mView.setLoadingIndicator(false);
+            }
+
+            @Override
+            public void onBeersFetchError() {
+                mView.showConnectionFailedError();
+                mView.setLoadingIndicator(false);
             }
         });
     }

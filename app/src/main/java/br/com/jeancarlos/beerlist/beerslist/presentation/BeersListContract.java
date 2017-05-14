@@ -23,11 +23,17 @@ public interface BeersListContract {
 
         void showBeersSearchResult(List<Beer> beers);
 
+        void onBeersUpdate(List<Beer> beers);
+
         void showConnectionFailedError();
+
+        void showDataNotAvailable();
     }
 
     interface Presenter extends BasePresenter {
 
         void getBeerByName(String query);
+
+        void refreshBeers();
     }
 }

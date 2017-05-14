@@ -53,11 +53,20 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
      *
      * @param beersList The beers list
      */
-    public void updateBeers(List<Beer> beersList) {
+    public void updateFilterList(List<Beer> beersList) {
         mBeersList = beersList;
         notifyDataSetChanged();
+        updateList(beersList);
+    }
 
-        for (Beer beer : beersList) {
+
+    /**
+     * This method updates the beers list with a new list
+     *
+     * @param newList The new beers list to be included
+     */
+    public void updateList(List<Beer> newList) {
+        for (Beer beer : newList) {
             if (!mOriginalListFilter.contains(beer)) {
                 mOriginalListFilter.add(beer);
             }

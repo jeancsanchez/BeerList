@@ -29,4 +29,11 @@ public class BaseActivity extends AppCompatActivity {
 
         return ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
     }
+
+    protected int getColorPrimaryDark() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            return getApplicationContext().getColor(R.color.colorPrimaryDark);
+
+        return ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark);
+    }
 }
