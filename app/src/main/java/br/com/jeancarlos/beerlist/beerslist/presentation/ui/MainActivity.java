@@ -170,6 +170,12 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     private void saveRecentQuery(String query) {
         SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
                 SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
+
+        // Clear the suggestions list if the list is greater then 5
+        if (mSearchView.getSuggestionsAdapter().getCount() > 5) {
+            suggestions.clearHistory();
+        }
+
         suggestions.saveRecentQuery(query, null);
     }
 }
