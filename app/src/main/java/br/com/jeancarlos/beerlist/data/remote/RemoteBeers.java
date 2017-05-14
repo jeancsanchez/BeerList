@@ -50,8 +50,6 @@ public class RemoteBeers implements BeersDataSource {
 
     @Override
     public void searchBeerByName(String query, @NonNull final SearchBeerCallback callback) {
-        query.replace(" ", "_");
-
         mRetrofitService.searchBeerByName(query)
                 .enqueue(new Callback<List<Beer>>() {
                     @Override

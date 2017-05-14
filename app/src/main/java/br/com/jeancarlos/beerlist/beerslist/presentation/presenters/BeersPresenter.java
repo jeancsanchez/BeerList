@@ -58,6 +58,9 @@ public class BeersPresenter implements BeersListContract.Presenter {
 
     @Override
     public void getBeerByName(String query) {
+        // Normalize query String
+        query = query.replaceAll(" ", "_").toLowerCase();
+
         mBeerRepository.searchBeerByName(query, new BeersDataSource.SearchBeerCallback() {
             @Override
             public void onSearchBeerSuccess(List<Beer> beers) {

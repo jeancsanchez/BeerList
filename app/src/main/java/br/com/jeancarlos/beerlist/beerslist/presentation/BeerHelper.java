@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist.beerslist.presentation.ui;
+package br.com.jeancarlos.beerlist.beerslist.presentation;
 
 /**
  * This class is just a helper that defines a key for parsing values between Activities

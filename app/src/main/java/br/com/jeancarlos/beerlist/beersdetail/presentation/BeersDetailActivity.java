@@ -9,7 +9,7 @@ import com.squareup.picasso.Picasso;
 
 import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
-import br.com.jeancarlos.beerlist.beerslist.presentation.ui.BeerHelper;
+import br.com.jeancarlos.beerlist.beerslist.presentation.BeerHelper;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
