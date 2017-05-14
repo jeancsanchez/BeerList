@@ -118,9 +118,9 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.options_menu, menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
         SearchView searchView = (SearchView) menu.findItem(R.id.search_view_beers).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
         searchView.setQueryHint(getResources().getString(R.string.title_search_view_beer));
         searchView.setOnQueryTextListener(this);
 
@@ -140,10 +140,22 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
         return false;
     }
 
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+    }
+
+
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             saveRecentQuery(query);
+
+        } else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            onQueryTextSubmit(query);
         }
     }
 

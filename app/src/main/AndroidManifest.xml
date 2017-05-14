@@ -18,7 +18,9 @@
             android:name=".util.SuggestionProvider"
             android:authorities="br.com.jeancarlos.beerlist.util.SuggestionProvider" />
 
-        <activity android:name=".beerslist.presentation.ui.MainActivity">
+        <activity
+            android:name=".beerslist.presentation.ui.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
