@@ -42,6 +42,8 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
     private BeerAdapter mBeerAdapter;
 
+    private SearchView mSearchView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,10 +121,10 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
         getMenuInflater().inflate(R.menu.options_menu, menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 
-        SearchView searchView = (SearchView) menu.findItem(R.id.search_view_beers).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setQueryHint(getResources().getString(R.string.title_search_view_beer));
-        searchView.setOnQueryTextListener(this);
+        mSearchView = (SearchView) menu.findItem(R.id.search_view_beers).getActionView();
+        mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        mSearchView.setQueryHint(getResources().getString(R.string.title_search_view_beer));
+        mSearchView.setOnQueryTextListener(this);
 
         return true;
     }
@@ -155,6 +157,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
         } else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
+            mSearchView.setQuery(query, false);
             onQueryTextSubmit(query);
         }
     }
