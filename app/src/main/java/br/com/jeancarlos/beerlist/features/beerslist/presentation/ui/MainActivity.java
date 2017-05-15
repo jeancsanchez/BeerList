@@ -242,7 +242,6 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
     /**
      * Method that saves the queries typed by user on list of the recent searches
-     *
      * @param query The text typed by user
      */
     private void saveRecentQuery(String query) {

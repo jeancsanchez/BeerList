@@ -15,7 +15,9 @@ import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 /**
- * @author jeancarlos
+ * Concrete implementation of a {@link BeersDataSource} as a db
+ *
+ * @author Jean Carlos
  * @since 5/10/17
  */
 

@@ -7,10 +7,10 @@ import java.util.List;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 
 /**
- * This interface represents the contract for any concrete class that pretends
- * manipulate data for {@link Beer} objects.
+ * This interface represents the entry point for any concrete class that wants access
+ * data {@link Beer} objects
  *
- * @author jeancarlos
+ * @author Jean Carlos
  * @since 5/10/17
  */
 

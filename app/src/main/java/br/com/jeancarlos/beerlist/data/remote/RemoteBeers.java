@@ -15,7 +15,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * @author jeancarlos
+ * Concrete implementation of a {@link BeersDataSource} as a rest service.
+ *
+ * @author Jean Carlos
  * @since 5/10/17
  */
 
