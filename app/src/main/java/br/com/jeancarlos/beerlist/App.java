@@ -2,8 +2,9 @@ package br.com.jeancarlos.beerlist;
 
 import android.app.Application;
 
-import br.com.jeancarlos.beerlist.data.BeerRepositoryComponent;
-import br.com.jeancarlos.beerlist.data.DaggerBeerRepositoryComponent;
+import br.com.jeancarlos.beerlist.injection.components.BeerRepositoryComponent;
+import br.com.jeancarlos.beerlist.injection.components.DaggerBeerRepositoryComponent;
+import br.com.jeancarlos.beerlist.injection.modules.ApplicationModule;
 
 /**
  * @author Jean Carlos
@@ -28,5 +29,7 @@ public class App extends Application {
                 .builder()
                 .applicationModule(new ApplicationModule(getApplicationContext()))
                 .build();
+
+
     }
 }

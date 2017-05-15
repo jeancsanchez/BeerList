@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist;
+package br.com.jeancarlos.beerlist.injection.modules;
 
 import android.content.Context;
 
@@ -17,7 +17,7 @@ public final class ApplicationModule {
 
     private final Context mContext;
 
-    ApplicationModule(Context context) {
+    public ApplicationModule(Context context) {
         mContext = context;
     }
 

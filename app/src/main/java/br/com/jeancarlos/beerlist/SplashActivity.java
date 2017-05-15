@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import br.com.jeancarlos.beerlist.beerslist.presentation.ui.MainActivity;
+import br.com.jeancarlos.beerlist.features.beerslist.presentation.ui.MainActivity;
 
 /**
  * This class represents the Splash screen

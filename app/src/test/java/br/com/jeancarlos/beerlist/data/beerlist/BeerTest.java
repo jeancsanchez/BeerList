@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

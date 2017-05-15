@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist.data.local;
+package br.com.jeancarlos.beerlist.injection.scopes;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -14,5 +14,5 @@ import javax.inject.Qualifier;
 @Qualifier
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Local {
+public @interface Remote {
 }

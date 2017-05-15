@@ -2,7 +2,7 @@ package br.com.jeancarlos.beerlist.data.remote;
 
 import java.util.List;
 
-import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

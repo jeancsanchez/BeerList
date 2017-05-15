@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.List;
 
-import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import retrofit2.Call;
 
 import static org.junit.Assert.assertThat;

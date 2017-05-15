@@ -1,14 +1,15 @@
-package br.com.jeancarlos.beerlist.beerslist.presentation.presenters;
+package br.com.jeancarlos.beerlist.features.beerslist.presentation.presenters;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
-import br.com.jeancarlos.beerlist.beerslist.presentation.BeersListContract;
-import br.com.jeancarlos.beerlist.beerslist.presentation.ui.MainActivity;
 import br.com.jeancarlos.beerlist.data.BeersDataSource;
-import br.com.jeancarlos.beerlist.data.BeersRepository;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.usecases.GetAllBeersUseCase;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.usecases.GetBeerByNameUseCase;
+import br.com.jeancarlos.beerlist.features.beerslist.presentation.BeersListContract;
+import br.com.jeancarlos.beerlist.features.beerslist.presentation.ui.MainActivity;
 
 /**
  * This class represents a presenter for {@link MainActivity}
@@ -22,12 +23,16 @@ import br.com.jeancarlos.beerlist.data.BeersRepository;
 
 public class BeersPresenter implements BeersListContract.Presenter {
 
-    private BeersRepository mBeerRepository;
+    private GetAllBeersUseCase mGetAllBeersUserCase;
+    private GetBeerByNameUseCase mGetBeersByNameUserCase;
     private BeersListContract.View mView;
 
     @Inject
-    BeersPresenter(BeersRepository beersRepository, BeersListContract.View view) {
-        mBeerRepository = beersRepository;
+    BeersPresenter(GetAllBeersUseCase getAllBeersUseCase,
+                   GetBeerByNameUseCase getBeerByNameUseCase,
+                   BeersListContract.View view) {
+        mGetAllBeersUserCase = getAllBeersUseCase;
+        mGetBeersByNameUserCase = getBeerByNameUseCase;
         mView = view;
     }
 
@@ -36,7 +41,7 @@ public class BeersPresenter implements BeersListContract.Presenter {
     public void start() {
         mView.setLoadingIndicator(true);
 
-        mBeerRepository.fetchBeers(new BeersDataSource.FetchBeersCallback() {
+        mGetAllBeersUserCase.executeUseCase(new BeersDataSource.FetchBeersCallback() {
             @Override
             public void onBeersFetched(List<Beer> beers) {
                 mView.showBeers(beers);
@@ -64,7 +69,7 @@ public class BeersPresenter implements BeersListContract.Presenter {
         // Normalize query String
         query = query.replaceAll(" ", "_").toLowerCase();
 
-        mBeerRepository.searchBeerByName(query, new BeersDataSource.SearchBeerCallback() {
+        mGetBeersByNameUserCase.executeUseCase(query, new BeersDataSource.SearchBeerCallback() {
             @Override
             public void onSearchBeerSuccess(List<Beer> beers) {
                 mView.showBeersSearchResult(beers);
@@ -83,7 +88,7 @@ public class BeersPresenter implements BeersListContract.Presenter {
     public void refreshBeers() {
         mView.setLoadingIndicator(true);
 
-        mBeerRepository.fetchBeers(new BeersDataSource.FetchBeersCallback() {
+        mGetAllBeersUserCase.executeUseCase(new BeersDataSource.FetchBeersCallback() {
             @Override
             public void onBeersFetched(List<Beer> beers) {
                 mView.onBeersUpdate(beers);

@@ -1,8 +1,10 @@
-package br.com.jeancarlos.beerlist.data;
+package br.com.jeancarlos.beerlist.injection.components;
 
 import javax.inject.Singleton;
 
-import br.com.jeancarlos.beerlist.ApplicationModule;
+import br.com.jeancarlos.beerlist.injection.modules.ApplicationModule;
+import br.com.jeancarlos.beerlist.data.BeersRepository;
+import br.com.jeancarlos.beerlist.injection.modules.BeerRepositoryModule;
 import dagger.Component;
 
 /**

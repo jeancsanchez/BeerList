@@ -1,10 +1,10 @@
-package br.com.jeancarlos.beerlist.beerslist.presentation;
+package br.com.jeancarlos.beerlist.features.beerslist.presentation;
 
 import java.util.List;
 
 import br.com.jeancarlos.beerlist.base.BasePresenter;
 import br.com.jeancarlos.beerlist.base.BaseView;
-import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 
 /**
  * This interface represents the contract between the view and the presenter.
@@ -28,6 +28,11 @@ public interface BeersListContract {
         void showConnectionFailedError();
 
         void showDataNotAvailable();
+
+        interface OnBeerItemClickedListener {
+
+            void beerClicked(Beer beer);
+        }
     }
 
     interface Presenter extends BasePresenter {

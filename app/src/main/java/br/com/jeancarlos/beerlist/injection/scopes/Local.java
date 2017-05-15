@@ -1,17 +1,18 @@
-package br.com.jeancarlos.beerlist.util;
+package br.com.jeancarlos.beerlist.injection.scopes;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import javax.inject.Scope;
+import javax.inject.Qualifier;
 
 /**
  * @author jeancarlos
  * @since 5/10/17
  */
 
-
-@Scope
+@Qualifier
+@Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PearActivity {
+public @interface Local {
 }

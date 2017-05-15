@@ -19,7 +19,7 @@
             android:authorities="br.com.jeancarlos.beerlist.util.SuggestionProvider" />
 
         <activity
-            android:name=".beerslist.presentation.ui.MainActivity"
+            android:name=".features.beerslist.presentation.ui.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -29,12 +29,12 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".beersdetail.presentation.BeersDetailActivity"
-            android:parentActivityName=".beerslist.presentation.ui.MainActivity">
+            android:name=".features.beersdetail.presentation.BeersDetailActivity"
+            android:parentActivityName=".features.beerslist.presentation.ui.MainActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".beerslist.presentation.ui.MainActivity" />
+                android:value=".features.beerslist.presentation.ui.MainActivity" />
         </activity>
         <activity
             android:name=".SplashActivity"

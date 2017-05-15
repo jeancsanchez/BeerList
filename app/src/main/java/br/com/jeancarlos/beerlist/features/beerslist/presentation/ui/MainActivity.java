@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist.beerslist.presentation.ui;
+package br.com.jeancarlos.beerlist.features.beerslist.presentation.ui;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -21,21 +21,23 @@ import javax.inject.Inject;
 import br.com.jeancarlos.beerlist.App;
 import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.base.BaseActivity;
-import br.com.jeancarlos.beerlist.beersdetail.presentation.BeersDetailActivity;
-import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
-import br.com.jeancarlos.beerlist.beerslist.presentation.BeerHelper;
-import br.com.jeancarlos.beerlist.beerslist.presentation.BeersListContract;
-import br.com.jeancarlos.beerlist.beerslist.presentation.adapters.BeerAdapter;
-import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.BeerPresenterModule;
-import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.BeersPresenter;
-import br.com.jeancarlos.beerlist.beerslist.presentation.presenters.DaggerBeerComponent;
+import br.com.jeancarlos.beerlist.features.beersdetail.presentation.BeersDetailActivity;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.usecases.GetAllBeersUseCase;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.usecases.GetBeerByNameUseCase;
+import br.com.jeancarlos.beerlist.features.beerslist.presentation.BeersListContract;
+import br.com.jeancarlos.beerlist.features.beerslist.presentation.adapters.BeerAdapter;
+import br.com.jeancarlos.beerlist.features.beerslist.presentation.helpers.BeerHelper;
+import br.com.jeancarlos.beerlist.features.beerslist.presentation.presenters.BeersPresenter;
+import br.com.jeancarlos.beerlist.injection.components.DaggerBeerPresenterComponent;
+import br.com.jeancarlos.beerlist.injection.modules.BeerPresenterModule;
 import br.com.jeancarlos.beerlist.util.NetworkUtil;
 import br.com.jeancarlos.beerlist.util.SuggestionProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements BeersListContract.View,
-        OnBeerItemClickedListener, SearchView.OnQueryTextListener {
+        BeersListContract.View.OnBeerItemClickedListener, SearchView.OnQueryTextListener {
 
     @BindView(R.id.recycler_view_beers)
     RecyclerView mRecyclerViewBeers;
@@ -72,9 +74,11 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
      */
     private void initInjections() {
         // Inject the presenter
-        DaggerBeerComponent.builder()
-                .beerRepositoryComponent(App.getBeerRepositoryComponent())
-                .beerPresenterModule(new BeerPresenterModule(this))
+        DaggerBeerPresenterComponent.builder()
+                .beerPresenterModule(new BeerPresenterModule(
+                        new GetAllBeersUseCase(App.getBeerRepositoryComponent().provideBeersRepository()),
+                        new GetBeerByNameUseCase(App.getBeerRepositoryComponent().provideBeersRepository()),
+                        this))
                 .build()
                 .inject(this);
     }

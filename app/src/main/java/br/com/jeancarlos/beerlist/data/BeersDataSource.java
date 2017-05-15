@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 
 /**
  * This interface represents the contract for any concrete class that pretends

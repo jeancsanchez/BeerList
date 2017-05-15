@@ -1,10 +1,12 @@
-package br.com.jeancarlos.beerlist.data;
+package br.com.jeancarlos.beerlist.injection.modules;
 
 import javax.inject.Singleton;
 
-import br.com.jeancarlos.beerlist.data.local.Local;
+import br.com.jeancarlos.beerlist.data.BeersDataSource;
+import br.com.jeancarlos.beerlist.data.BeersRepository;
+import br.com.jeancarlos.beerlist.injection.scopes.Local;
 import br.com.jeancarlos.beerlist.data.local.LocalBeers;
-import br.com.jeancarlos.beerlist.data.remote.Remote;
+import br.com.jeancarlos.beerlist.injection.scopes.Remote;
 import br.com.jeancarlos.beerlist.data.remote.RemoteBeers;
 import dagger.Binds;
 import dagger.Module;
@@ -18,7 +20,7 @@ import dagger.Module;
 
 
 @Module
-abstract class BeerRepositoryModule {
+public abstract class BeerRepositoryModule {
 
     @Singleton
     @Binds

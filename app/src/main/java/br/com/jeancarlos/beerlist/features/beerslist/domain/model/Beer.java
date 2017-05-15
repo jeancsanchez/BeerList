@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist.beerslist.domain.model;
+package br.com.jeancarlos.beerlist.features.beerslist.domain.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

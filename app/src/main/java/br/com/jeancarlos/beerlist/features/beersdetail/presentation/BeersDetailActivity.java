@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist.beersdetail.presentation;
+package br.com.jeancarlos.beerlist.features.beersdetail.presentation;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +8,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import br.com.jeancarlos.beerlist.R;
-import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
-import br.com.jeancarlos.beerlist.beerslist.presentation.BeerHelper;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
+import br.com.jeancarlos.beerlist.features.beerslist.presentation.helpers.BeerHelper;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -50,12 +50,6 @@ public class BeersDetailActivity extends AppCompatActivity {
         mTextViewDescription.setText(mBeer.getDescription());
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        supportFinishAfterTransition();
-    }
 
     @Override
     public void onResume() {

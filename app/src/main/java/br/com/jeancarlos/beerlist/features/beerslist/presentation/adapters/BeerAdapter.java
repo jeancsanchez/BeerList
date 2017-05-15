@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist.beerslist.presentation.adapters;
+package br.com.jeancarlos.beerlist.features.beerslist.presentation.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.jeancarlos.beerlist.R;
-import br.com.jeancarlos.beerlist.beerslist.domain.model.Beer;
-import br.com.jeancarlos.beerlist.beerslist.presentation.ui.OnBeerItemClickedListener;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
+import br.com.jeancarlos.beerlist.features.beerslist.presentation.BeersListContract.View.OnBeerItemClickedListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
