@@ -8,8 +8,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import br.com.jeancarlos.beerlist.data.BeersDataSource;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,10 +66,5 @@ public class RemoteBeers implements BeersDataSource {
                         callback.onSearchBeerFailure();
                     }
                 });
-    }
-
-    @Override
-    public void saveBeers(List<Beer> beers) {
-
     }
 }

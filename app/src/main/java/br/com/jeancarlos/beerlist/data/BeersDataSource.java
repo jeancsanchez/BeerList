@@ -30,12 +30,18 @@ public interface BeersDataSource {
      */
     void searchBeerByName(String query, @NonNull SearchBeerCallback callback);
 
+
     /**
-     * Save a list of beers on repository
-     *
-     * @param beers A list of beers to be save
+     * This interface is for local repositories that wants save beers locally
      */
-    void saveBeers(List<Beer> beers);
+    interface OnSaveBeers {
+        /**
+         * Save a list of beers on repository
+         *
+         * @param beers A list of beers to be save
+         */
+        void saveBeers(List<Beer> beers);
+    }
 
 
     /**

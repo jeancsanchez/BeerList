@@ -8,8 +8,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import br.com.jeancarlos.beerlist.data.BeersDataSource;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -22,7 +22,7 @@ import io.realm.RealmResults;
  */
 
 @Singleton
-public class LocalBeers implements BeersDataSource {
+public class LocalBeers implements BeersDataSource, BeersDataSource.OnSaveBeers {
     private Context context;
     private Realm mRealm;
 
@@ -47,7 +47,11 @@ public class LocalBeers implements BeersDataSource {
 
     @Override
     public void searchBeerByName(String query, @NonNull SearchBeerCallback callback) {
-        // TODO: DO STUFF
+        RealmQuery realmQuery = mRealm.where(Beer.class);
+        realmQuery.contains("name", query);
+        RealmResults<Beer> results = realmQuery.findAll();
+
+        callback.onSearchBeerSuccess(results);
     }
 
 
