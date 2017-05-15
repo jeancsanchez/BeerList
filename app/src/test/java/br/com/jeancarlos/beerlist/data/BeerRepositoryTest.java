@@ -25,10 +25,13 @@ public class BeerRepositoryTest {
 
     @Mock
     BeersDataSource.FetchBeersCallback fetchBeersCallback;
+
     @Mock
     private RemoteBeers mRemoteBeers;
+
     @Mock
     private LocalBeers mLocalBeers;
+
     private BeersRepository mBeersRepository;
 
 
