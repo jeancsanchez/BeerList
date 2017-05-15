@@ -26,6 +26,8 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 /**
+ * This class makes tests for {@link BeersPresenter}
+ *
  * @author Jean Carlos
  * @since 5/15/17
  */

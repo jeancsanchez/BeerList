@@ -9,6 +9,9 @@ package br.com.jeancarlos.beerlist.base;
 
 public interface BasePresenter {
 
+    /**
+     * Starts the presenter
+     */
     void start();
 
 }

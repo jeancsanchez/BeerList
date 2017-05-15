@@ -9,11 +9,12 @@ import java.util.List;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import retrofit2.Call;
 
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 
 /**
+ * This class makes tests for {@link RetrofitService}
+ *
  * @author Jean Carlos
  * @since 5/12/17
  */

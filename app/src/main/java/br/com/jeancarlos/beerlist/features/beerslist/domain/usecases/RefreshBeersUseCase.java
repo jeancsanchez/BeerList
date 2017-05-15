@@ -19,7 +19,13 @@ public class RefreshBeersUseCase {
         this.mBeersRepository = beersRepository;
     }
 
-    public void executeUseCase(String query, BeersDataSource.FetchBeersCallback fetchBeersCallback) {
+    /**
+     * Executes the use case: Refresh beers list. This method makes the same
+     * thing that {@link GetAllBeersUseCase#executeUseCase(BeersDataSource.FetchBeersCallback)}
+     *
+     * @param fetchBeersCallback A callback for handle the data
+     */
+    public void executeUseCase(BeersDataSource.FetchBeersCallback fetchBeersCallback) {
         mBeersRepository.fetchBeers(fetchBeersCallback);
     }
 }

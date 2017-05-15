@@ -16,13 +16,31 @@ import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 
 public interface BeersDataSource {
 
+    /**
+     * Fetch all beers
+     *
+     * @param callback A callback for handle response
+     */
     void fetchBeers(@NonNull FetchBeersCallback callback);
 
+    /**
+     * Search a beer by name
+     *
+     * @param callback A callback for handle response
+     */
     void searchBeerByName(String query, @NonNull SearchBeerCallback callback);
 
+    /**
+     * Save a list of beers on repository
+     *
+     * @param beers A list of beers to be save
+     */
     void saveBeers(List<Beer> beers);
 
 
+    /**
+     * This interface is a callback for handle data from {@link #fetchBeers(FetchBeersCallback)}
+     */
     interface FetchBeersCallback {
 
         void onBeersFetched(List<Beer> beers);
@@ -33,6 +51,9 @@ public interface BeersDataSource {
     }
 
 
+    /**
+     * This interface is a callback for handle data from {@link #searchBeerByName(String, SearchBeerCallback)}
+     */
     interface SearchBeerCallback {
 
         void onSearchBeerSuccess(List<Beer> beers);

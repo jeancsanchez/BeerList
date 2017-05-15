@@ -6,6 +6,8 @@ import br.com.jeancarlos.beerlist.injection.scopes.PearActivity;
 import dagger.Component;
 
 /**
+ * This class represents a Dagger BeerPresenter component
+ *
  * @author Jean Carlos
  * @since 5/10/17
  */

@@ -16,13 +16,11 @@ import br.com.jeancarlos.beerlist.R;
 
 public class BaseActivity extends AppCompatActivity {
 
-    protected int getColorAccent() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            return getApplicationContext().getColor(R.color.colorAccent);
-
-        return ContextCompat.getColor(getApplicationContext(), R.color.colorAccent);
-    }
-
+    /**
+     * Get primary color primary
+     *
+     * @return A single color value in the form 0xAARRGGBB.
+     */
     protected int getColorPrimary() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             return getApplicationContext().getColor(R.color.colorPrimary);
@@ -30,6 +28,10 @@ public class BaseActivity extends AppCompatActivity {
         return ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
     }
 
+    /**
+     * Get primary color primary dark
+     * @return A single color value in the form 0xAARRGGBB.
+     */
     protected int getColorPrimaryDark() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             return getApplicationContext().getColor(R.color.colorPrimaryDark);

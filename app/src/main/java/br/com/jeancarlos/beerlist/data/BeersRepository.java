@@ -11,6 +11,8 @@ import br.com.jeancarlos.beerlist.injection.scopes.Local;
 import br.com.jeancarlos.beerlist.injection.scopes.Remote;
 
 /**
+ * Concrete implementation of a {@link BeersDataSource} as a {@link Beer} repository.
+ *
  * @author Jean Carlos
  * @since 5/10/17
  */

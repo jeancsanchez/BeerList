@@ -7,6 +7,8 @@ import br.com.jeancarlos.beerlist.injection.components.DaggerBeerRepositoryCompo
 import br.com.jeancarlos.beerlist.injection.modules.ApplicationModule;
 
 /**
+ * This class represents the Application
+ *
  * @author Jean Carlos
  * @since 5/10/17
  */

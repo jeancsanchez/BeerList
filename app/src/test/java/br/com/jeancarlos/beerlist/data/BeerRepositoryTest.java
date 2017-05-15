@@ -6,18 +6,17 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import br.com.jeancarlos.beerlist.data.local.LocalBeers;
 import br.com.jeancarlos.beerlist.data.remote.RemoteBeers;
-import br.com.jeancarlos.beerlist.injection.scopes.Local;
-import br.com.jeancarlos.beerlist.injection.scopes.Remote;
 
 import static org.mockito.Mockito.verify;
 
 /**
+ * This class makes tests for {@link BeersRepository}
+ *
  * @author Jean Carlos
  * @since 5/12/17
  */

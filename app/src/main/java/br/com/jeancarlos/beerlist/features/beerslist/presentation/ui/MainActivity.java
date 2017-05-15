@@ -36,6 +36,13 @@ import br.com.jeancarlos.beerlist.util.SuggestionProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * This is the main screen (Activity) on the application. This class also implements
+ * the {@link BeersListContract}.
+ * <p>
+ * All visual elements related to the beers listing are here.
+ * </p>
+ */
 public class MainActivity extends BaseActivity implements BeersListContract.View,
         BeersListContract.View.OnBeerItemClickedListener, SearchView.OnQueryTextListener {
 
@@ -228,6 +235,11 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     }
 
 
+    /**
+     * Handle specifics essential for beers search
+     *
+     * @param intent
+     */
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);

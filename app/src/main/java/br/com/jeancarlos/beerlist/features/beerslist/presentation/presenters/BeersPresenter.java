@@ -12,7 +12,8 @@ import br.com.jeancarlos.beerlist.features.beerslist.presentation.BeersListContr
 import br.com.jeancarlos.beerlist.features.beerslist.presentation.ui.MainActivity;
 
 /**
- * This class represents a presenter for {@link MainActivity}
+ * This class represents a presenter for {@link MainActivity} and is a concrete implementation of
+ * {@link BeersListContract}
  * <p>
  * It responds to user actions and manipulates data as required by UI
  * </p>

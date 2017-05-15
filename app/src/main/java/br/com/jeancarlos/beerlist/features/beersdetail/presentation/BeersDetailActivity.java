@@ -38,7 +38,9 @@ public class BeersDetailActivity extends AppCompatActivity {
         mBeer = getIntent().getExtras().getParcelable(BeerHelper.KEY_BEER);
     }
 
-    // This method loads the beer details
+    /**
+     * This method loads the beer details
+     */
     private void loadBeerDetails() {
         Picasso.with(this)
                 .load(mBeer.getImageUrl())

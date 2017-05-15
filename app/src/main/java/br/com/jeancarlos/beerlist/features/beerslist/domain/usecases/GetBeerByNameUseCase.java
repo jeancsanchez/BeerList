@@ -19,6 +19,13 @@ public class GetBeerByNameUseCase {
         this.mBeersRepository = beersRepository;
     }
 
+
+    /**
+     * Executes the use case: Get beer by name
+     *
+     * @param query              The string query for searching beer by name on server
+     * @param searchBeerCallback A callback for handle the data
+     */
     public void executeUseCase(String query, BeersDataSource.SearchBeerCallback searchBeerCallback) {
         mBeersRepository.searchBeerByName(query, searchBeerCallback);
     }

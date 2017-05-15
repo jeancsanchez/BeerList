@@ -24,6 +24,11 @@ public class GetAllBeersUseCase {
     }
 
 
+    /**
+     * Executes the use case: Get all beers
+     *
+     * @param fetchBeersCallback
+     */
     public void executeUseCase(BeersDataSource.FetchBeersCallback fetchBeersCallback) {
         mBeersRepository.fetchBeers(fetchBeersCallback);
     }

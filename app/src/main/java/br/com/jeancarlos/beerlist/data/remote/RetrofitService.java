@@ -45,6 +45,11 @@ public interface RetrofitService {
     class Creator {
         private static RetrofitService mRetrofitService;
 
+        /**
+         * Return a single instance of {@link RetrofitService}
+         *
+         * @return A new instance of {@link RetrofitService}
+         */
         public static RetrofitService newRetrofitService() {
             if (mRetrofitService == null) {
                 Retrofit retrofit = new Retrofit.Builder()

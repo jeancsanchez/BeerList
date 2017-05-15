@@ -8,7 +8,9 @@ import br.com.jeancarlos.beerlist.injection.modules.BeerRepositoryModule;
 import dagger.Component;
 
 /**
- * @author jeancarlos
+ * This class represents a Dagger BeerRepository component
+ *
+ * @author Jean Carlos
  * @since 5/10/17
  */
 

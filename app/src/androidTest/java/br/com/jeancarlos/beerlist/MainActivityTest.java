@@ -72,6 +72,9 @@ public class MainActivityTest {
 
     }
 
+    /**
+     * Creates a fake beer list
+     */
     private void createFakeBeersList() {
         BEERS = new ArrayList<>();
         BEERS.add(new Beer(1, "bee1"));

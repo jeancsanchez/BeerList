@@ -7,7 +7,9 @@ import java.lang.annotation.RetentionPolicy;
 import javax.inject.Qualifier;
 
 /**
- * @author jeancarlos
+ * This is a Dagger scope to identify Local repository
+ *
+ * @author Jean Carlos
  * @since 5/10/17
  */
 

@@ -14,7 +14,7 @@ import dagger.Module;
 /**
  * This is used by Dagger to inject the required arguments into the {@link BeersRepository}.
  *
- * @author jeancarlos
+ * @author Jean Carlos
  * @since 5/10/17
  */
 

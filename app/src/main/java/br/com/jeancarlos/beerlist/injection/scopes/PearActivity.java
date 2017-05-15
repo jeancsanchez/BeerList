@@ -6,7 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import javax.inject.Scope;
 
 /**
- * @author jeancarlos
+ * This is a Dagger scope for identify each activity scope
+ *
+ * @author Jean Carlos
  * @since 5/10/17
  */
 

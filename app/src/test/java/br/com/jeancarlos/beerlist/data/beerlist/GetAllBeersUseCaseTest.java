@@ -14,6 +14,8 @@ import br.com.jeancarlos.beerlist.features.beerslist.domain.usecases.GetAllBeers
 import static org.mockito.Mockito.verify;
 
 /**
+ * This class makes tests for {@link GetAllBeersUseCase}
+ *
  * @author Jean Carlos
  * @since 5/15/17
  */
