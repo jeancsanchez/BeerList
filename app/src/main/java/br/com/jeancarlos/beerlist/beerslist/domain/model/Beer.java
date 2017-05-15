@@ -47,7 +47,6 @@ public class Beer extends RealmObject implements Parcelable {
     public Beer() {
     }
 
-    /* Parcelable implementation - BEGIN */
     protected Beer(Parcel in) {
         id = in.readInt();
         name = in.readString();
@@ -93,7 +92,6 @@ public class Beer extends RealmObject implements Parcelable {
         dest.writeString(description);
         dest.writeString(imageUrl);
     }
-    /* Parcelable implementation - END */
 
 
     @Override
