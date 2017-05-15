@@ -4,13 +4,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import br.com.jeancarlos.beerlist.data.local.LocalBeers;
 import br.com.jeancarlos.beerlist.data.remote.RemoteBeers;
-
-
+import br.com.jeancarlos.beerlist.injection.scopes.Local;
+import br.com.jeancarlos.beerlist.injection.scopes.Remote;
 
 import static org.mockito.Mockito.verify;
 
@@ -23,8 +26,8 @@ import static org.mockito.Mockito.verify;
 @RunWith(JUnit4.class)
 public class BeerRepositoryTest {
 
-    @Mock
-    BeersDataSource.FetchBeersCallback fetchBeersCallback;
+    @Captor
+    private ArgumentCaptor<BeersDataSource.FetchBeersCallback> mFetchBeerCallbackCaptor;
 
     @Mock
     private RemoteBeers mRemoteBeers;
@@ -38,23 +41,18 @@ public class BeerRepositoryTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
         mBeersRepository = new BeersRepository(mRemoteBeers, mLocalBeers);
     }
 
 
     @Test
-    public void fetch_beers_from_rest_service() {
-        mBeersRepository.fetchBeers(fetchBeersCallback);
+    public void fetchBeers() {
+        mBeersRepository.fetchBeers(mFetchBeerCallbackCaptor.capture());
 
-        verify(mRemoteBeers).fetchBeers(fetchBeersCallback);
-    }
+        // Call local beer first
+        verify(mLocalBeers).fetchBeers(mFetchBeerCallbackCaptor.capture());
 
-
-    @Test
-    public void fetch_beers_locally() {
-        mBeersRepository.fetchBeers(fetchBeersCallback);
-
-        verify(mLocalBeers).fetchBeers(fetchBeersCallback);
+        // Update from rest service
+        verify(mRemoteBeers).fetchBeers(mFetchBeerCallbackCaptor.capture());
     }
 }
