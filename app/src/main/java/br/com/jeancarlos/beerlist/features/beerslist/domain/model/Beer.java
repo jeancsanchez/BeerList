@@ -47,6 +47,10 @@ public class Beer extends RealmObject implements Parcelable {
     public Beer() {
     }
 
+    public Beer(int id) {
+        this.id = id;
+    }
+
     protected Beer(Parcel in) {
         id = in.readInt();
         name = in.readString();
