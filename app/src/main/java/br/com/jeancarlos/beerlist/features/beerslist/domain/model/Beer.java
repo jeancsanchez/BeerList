@@ -43,12 +43,30 @@ public class Beer extends RealmObject implements Parcelable {
     @SerializedName("image_url")
     private String imageUrl;
 
-    // Default constructor
+    /**
+     * Default constructor
+     */
     public Beer() {
     }
 
+    /**
+     * Beer constructor
+     *
+     * @param id Beer unique id
+     */
     public Beer(int id) {
         this.id = id;
+    }
+
+    /**
+     * Beer constructor
+     *
+     * @param id   Beer unique id
+     * @param name Beer name
+     */
+    public Beer(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     protected Beer(Parcel in) {
