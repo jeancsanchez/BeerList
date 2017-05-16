@@ -12,6 +12,7 @@ import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 
 import static junit.framework.Assert.assertFalse;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 /**
  * This class makes tests for {@link DisfavorUseCase}
@@ -41,6 +42,8 @@ public class DisfavorUseCaseTest {
         // Execute the use case
         mDisfavorUseCase.executeUseCase(beer);
         verify(mBeerRepository).removeFavoriteBeer(beer);
+        verifyNoMoreInteractions(mBeerRepository);
+
 
         // Check if the beer is not favorite now
         assertFalse(beer.isFavorite());

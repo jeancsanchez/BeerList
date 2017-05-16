@@ -48,7 +48,7 @@ public class BeerRepositoryTest {
     public void fetchBeers() {
         mBeersRepository.fetchBeers(mFetchBeerCallbackCaptor.capture());
 
-        // Call local beer first
+        // Call local beers first
         verify(mLocalBeers).fetchBeers(mFetchBeerCallbackCaptor.capture());
 
         // Update from rest service

@@ -12,6 +12,7 @@ import br.com.jeancarlos.beerlist.data.BeersRepository;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.usecases.GetAllBeersUseCase;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 /**
  * This class makes tests for {@link GetAllBeersUseCase}
@@ -41,6 +42,8 @@ public class GetAllBeersUseCaseTest {
     @Test
     public void executeGetAllBeerUseCase() {
         mGetAllBeersUseCase.executeUseCase(mFetchBeersCallback);
+
         verify(mBeerRepository).fetchBeers(mFetchBeersCallback);
+        verifyNoMoreInteractions(mBeerRepository);
     }
 }

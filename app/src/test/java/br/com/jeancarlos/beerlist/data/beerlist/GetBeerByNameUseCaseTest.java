@@ -10,6 +10,7 @@ import br.com.jeancarlos.beerlist.data.BeersRepository;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.usecases.GetBeerByNameUseCase;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 /**
  * This class makes tests for {@link GetBeerByNameUseCase}
@@ -38,6 +39,8 @@ public class GetBeerByNameUseCaseTest {
     public void executeGetAllBeerUseCase() {
         String query = "Skol";
         mGetBeerByNameUseCase.executeUseCase(query, mSearchBeerCallback);
+
         verify(mBeerRepository).searchBeerByName(query, mSearchBeerCallback);
+        verifyNoMoreInteractions(mBeerRepository);
     }
 }

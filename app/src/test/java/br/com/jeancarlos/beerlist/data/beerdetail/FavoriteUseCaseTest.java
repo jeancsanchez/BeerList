@@ -12,6 +12,7 @@ import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 /**
  * This class makes tests for {@link FavoriteUseCase}
@@ -41,6 +42,8 @@ public class FavoriteUseCaseTest {
         // Execute the use case
         mFavoriteUseCase.executeUseCase(beer);
         verify(mBeerRepository).saveFavoriteBeer(beer);
+        verifyNoMoreInteractions(mBeerRepository);
+
 
         // Check if the beer is favorite now
         assertTrue(beer.isFavorite());

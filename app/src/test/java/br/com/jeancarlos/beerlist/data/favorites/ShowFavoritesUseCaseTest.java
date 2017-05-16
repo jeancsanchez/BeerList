@@ -13,6 +13,7 @@ import br.com.jeancarlos.beerlist.data.BeersRepository;
 import br.com.jeancarlos.beerlist.features.favorites.domain.ShowFavoritesUseCase;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 /**
  * This class makes tests for {@link ShowFavoritesUseCase}
@@ -40,6 +41,9 @@ public class ShowFavoritesUseCaseTest {
     @Test
     public void executeShowFavoritesUseCase() {
         mShowFavoritesUseCase.executeUseCase(mFavoriteBeersCallbackCaptor.capture());
+
         verify(mBeerRepository).getFavoriteBeers(mFavoriteBeersCallbackCaptor.capture());
+        verifyNoMoreInteractions(mBeerRepository);
+
     }
 }
