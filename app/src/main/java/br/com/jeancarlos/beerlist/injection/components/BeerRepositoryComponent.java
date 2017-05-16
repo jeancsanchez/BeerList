@@ -17,5 +17,6 @@ import dagger.Component;
 @Singleton
 @Component(modules = {BeerRepositoryModule.class, ApplicationModule.class})
 public interface BeerRepositoryComponent {
+
     BeersRepository provideBeersRepository();
 }

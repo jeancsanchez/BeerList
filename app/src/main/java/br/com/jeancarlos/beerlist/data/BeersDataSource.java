@@ -49,6 +49,12 @@ public interface BeersDataSource {
          */
         void saveFavoriteBeer(Beer beer);
 
+        /**
+         * Remove a favorite beer
+         *
+         * @param beer A {@link Beer}
+         */
+        void removeFavoriteBeer(Beer beer);
 
         /**
          * Get a list of favorite beers

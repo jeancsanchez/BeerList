@@ -15,5 +15,6 @@ import dagger.Component;
 @PearActivity
 @Component(modules = {FavoritePresenterModule.class})
 public interface FavoritePresenterComponent {
+
     void inject(FavoritesActivity favoritesActivity);
 }

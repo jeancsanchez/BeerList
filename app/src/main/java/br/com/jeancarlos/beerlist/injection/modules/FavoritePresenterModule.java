@@ -35,5 +35,4 @@ public class FavoritePresenterModule {
     ShowFavoritesUseCase providesShowFavoritesUseCase() {
         return mShowFavoritesUseCase;
     }
-
 }

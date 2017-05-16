@@ -64,9 +64,12 @@ public class LocalBeers implements BeersDataSource.BeersLocalDataSource {
 
     @Override
     public void saveFavoriteBeer(Beer beer) {
-        mRealm.beginTransaction();
-        mRealm.insertOrUpdate(beer);
-        mRealm.commitTransaction();
+        insertOrUpdate(beer);
+    }
+
+    @Override
+    public void removeFavoriteBeer(Beer beer) {
+        insertOrUpdate(beer);
     }
 
     @Override
@@ -80,5 +83,16 @@ public class LocalBeers implements BeersDataSource.BeersLocalDataSource {
             favoriteBeersCallback.onFavoriteBeersFetched(results);
         else
             favoriteBeersCallback.onFavoriteBeersNotFound();
+    }
+
+    /**
+     * Insert or update a beer
+     *
+     * @param beer The beer
+     */
+    private void insertOrUpdate(Beer beer) {
+        mRealm.beginTransaction();
+        mRealm.insertOrUpdate(beer);
+        mRealm.commitTransaction();
     }
 }

@@ -4,11 +4,11 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
-import br.com.jeancarlos.beerlist.data.BeersDataSource;
 import br.com.jeancarlos.beerlist.data.BeersRepository;
+import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 
 /**
- * This use case handles getting all beers
+ * This use case favorites a beer
  *
  * @author Jean Carlos
  * @since 5/14/17
@@ -25,11 +25,12 @@ public class FavoriteUseCase {
 
 
     /**
-     * Executes the use case: Get all beers
+     * Executes the use case: Favorite a beer
      *
-     * @param fetchBeersCallback
+     * @param beer The beer
      */
-    public void executeUseCase(BeersDataSource.FetchBeersCallback fetchBeersCallback) {
-        mBeersRepository.fetchBeers(fetchBeersCallback);
+    public void executeUseCase(Beer beer) {
+        beer.setFavorite(true);
+        mBeersRepository.saveFavoriteBeer(beer);
     }
 }

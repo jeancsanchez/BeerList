@@ -71,6 +71,11 @@ public class BeersRepository implements BeersDataSource, BeersDataSource.BeersLo
     }
 
     @Override
+    public void removeFavoriteBeer(Beer beer) {
+        mLocalBeers.removeFavoriteBeer(beer);
+    }
+
+    @Override
     public void getFavoriteBeers(FavoriteBeersCallback favoriteBeersCallback) {
         mLocalBeers.getFavoriteBeers(favoriteBeersCallback);
     }
