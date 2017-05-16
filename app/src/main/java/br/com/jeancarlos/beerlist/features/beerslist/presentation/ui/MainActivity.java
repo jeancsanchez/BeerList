@@ -21,7 +21,8 @@ import javax.inject.Inject;
 import br.com.jeancarlos.beerlist.App;
 import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.base.BaseActivity;
-import br.com.jeancarlos.beerlist.features.beersdetail.presentation.BeersDetailActivity;
+import br.com.jeancarlos.beerlist.base.BaseView;
+import br.com.jeancarlos.beerlist.features.beersdetail.presentation.ui.BeersDetailActivity;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.usecases.GetAllBeersUseCase;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.usecases.GetBeerByNameUseCase;
@@ -45,7 +46,7 @@ import butterknife.ButterKnife;
  * </p>
  */
 public class MainActivity extends BaseActivity implements BeersListContract.View,
-        BeersListContract.View.OnBeerItemClickedListener, SearchView.OnQueryTextListener,
+        BaseView.OnBeerItemClickedListener, SearchView.OnQueryTextListener,
         BeersListContract.View.OnFavoritesItemClickedListener {
 
     @BindView(R.id.recycler_view_beers)

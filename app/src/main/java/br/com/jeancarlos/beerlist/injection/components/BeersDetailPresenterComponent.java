@@ -1,6 +1,6 @@
 package br.com.jeancarlos.beerlist.injection.components;
 
-import br.com.jeancarlos.beerlist.features.beersdetail.presentation.BeersDetailActivity;
+import br.com.jeancarlos.beerlist.features.beersdetail.presentation.ui.BeersDetailActivity;
 import br.com.jeancarlos.beerlist.injection.modules.BeersDetailPresenterModule;
 import br.com.jeancarlos.beerlist.injection.scopes.PearActivity;
 import dagger.Component;

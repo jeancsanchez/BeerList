@@ -17,6 +17,10 @@ public interface BeersDetailContract {
      * Interface that represents the view
      */
     interface View extends BaseView<Presenter> {
+        /**
+         * Show the beer details
+         */
+        void showBeerDetails();
 
         /**
          * Show a icon for favorite a beer

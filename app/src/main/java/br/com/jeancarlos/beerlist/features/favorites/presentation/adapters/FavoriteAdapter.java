@@ -1,7 +1,6 @@
 package br.com.jeancarlos.beerlist.features.favorites.presentation.adapters;
 
 import android.content.Context;
-import android.view.View;
 
 import java.util.List;
 
@@ -20,16 +19,7 @@ public class FavoriteAdapter extends BeerAdapter {
 
     public FavoriteAdapter(Context context) {
         super(context);
-    }
-
-    @Override
-    public void onBindViewHolder(BeerViewHolder holder, int position) {
-        super.onBindViewHolder(holder, position);
-
-        // hide the favorites item
-        if (position == 0) {
-            holder.itemView.setVisibility(View.GONE);
-        }
+        super.canShowFavoritesItem(false);
     }
 
     @Override

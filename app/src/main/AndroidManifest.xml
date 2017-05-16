@@ -28,13 +28,8 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity
-            android:name=".features.beersdetail.presentation.BeersDetailActivity"
-            android:parentActivityName=".features.beerslist.presentation.ui.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".features.beerslist.presentation.ui.MainActivity" />
-        </activity>
+        <activity android:name=".features.beersdetail.presentation.ui.BeersDetailActivity" />
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">

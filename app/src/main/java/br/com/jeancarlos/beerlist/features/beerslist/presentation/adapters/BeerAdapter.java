@@ -35,10 +35,12 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
     private List<Beer> mOriginalListFilter = new ArrayList<>();
     private OnBeerItemClickedListener mOnBeerClickListener;
     private OnFavoritesItemClickedListener mOnFavoritesClickListener;
+    private boolean mCanShowFavoritesItem;
 
 
     public BeerAdapter(Context context) {
         this.mContext = context;
+        canShowFavoritesItem(true);
     }
 
     /**
@@ -104,8 +106,8 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
     @Override
     public void onBindViewHolder(BeerViewHolder holder, int position) {
 
-        // Set favorite beers on top
-        if (position == 0) {
+        // Set favorite beers on top if necessary
+        if (mCanShowFavoritesItem && position == 0) {
             Picasso.with(mContext)
                     .load(R.drawable.ic_favorite)
                     .into(holder.mImageViewBeerCover);
@@ -140,6 +142,14 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
         mOnFavoritesClickListener.favoritesClicked();
     }
 
+    /**
+     * This method verify if can show the favorites item on top of the list
+     *
+     * @param canShow A boolean for set if can show or not
+     */
+    protected void canShowFavoritesItem(boolean canShow) {
+        this.mCanShowFavoritesItem = canShow;
+    }
 
     @Override
     public int getItemCount() {

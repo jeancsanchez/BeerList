@@ -14,7 +14,7 @@ import br.com.jeancarlos.beerlist.App;
 import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.base.BaseActivity;
 import br.com.jeancarlos.beerlist.base.BaseView;
-import br.com.jeancarlos.beerlist.features.beersdetail.presentation.BeersDetailActivity;
+import br.com.jeancarlos.beerlist.features.beersdetail.presentation.ui.BeersDetailActivity;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import br.com.jeancarlos.beerlist.features.beerslist.presentation.helpers.BeerHelper;
 import br.com.jeancarlos.beerlist.features.favorites.domain.ShowFavoritesUseCase;
@@ -31,7 +31,6 @@ public class FavoritesActivity extends BaseActivity implements FavoritesContract
 
     @BindView(R.id.recycler_view_favorites)
     RecyclerView mRecyclerViewFavorites;
-
 
     @Inject
     FavoritePresenter mFavoritePresenter;
@@ -51,7 +50,6 @@ public class FavoritesActivity extends BaseActivity implements FavoritesContract
         ButterKnife.bind(this);
         initInjections();
         initAdapter();
-        mFavoritePresenter.start();
     }
 
     private void initAdapter() {
@@ -91,5 +89,11 @@ public class FavoritesActivity extends BaseActivity implements FavoritesContract
         Intent intent = new Intent(this, BeersDetailActivity.class);
         intent.putExtra(BeerHelper.KEY_BEER, beer);
         startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mFavoritePresenter.start();
     }
 }

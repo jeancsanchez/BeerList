@@ -1,6 +1,7 @@
-package br.com.jeancarlos.beerlist.features.beersdetail.presentation;
+package br.com.jeancarlos.beerlist.features.beersdetail.presentation.ui;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.base.BaseActivity;
 import br.com.jeancarlos.beerlist.features.beersdetail.domain.DisfavorUseCase;
 import br.com.jeancarlos.beerlist.features.beersdetail.domain.FavoriteUseCase;
+import br.com.jeancarlos.beerlist.features.beersdetail.presentation.BeersDetailContract;
 import br.com.jeancarlos.beerlist.features.beersdetail.presentation.presenters.BeersDetailPresenter;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import br.com.jeancarlos.beerlist.features.beerslist.presentation.helpers.BeerHelper;
@@ -50,9 +52,14 @@ public class BeersDetailActivity extends BaseActivity implements BeersDetailCont
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beers_detail);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         ButterKnife.bind(this);
-        mBeer = getIntent().getExtras().getParcelable(BeerHelper.KEY_BEER);
         initInjections();
+        mBeer = getIntent().getExtras().getParcelable(BeerHelper.KEY_BEER);
+        mBeersDetailPresenter.start();
     }
 
     /**
@@ -73,11 +80,9 @@ public class BeersDetailActivity extends BaseActivity implements BeersDetailCont
                 .inject(this);
     }
 
-    /**
-     * This method loads the beer details
-     */
-    private void loadBeerDetails() {
-        Picasso.with(this)
+    @Override
+    public void showBeerDetails() {
+        Picasso.with(BeersDetailActivity.this)
                 .load(mBeer.getImageUrl())
                 .placeholder(R.drawable.icon_star)
                 .into(mImageViewBeerDetail);
@@ -86,6 +91,13 @@ public class BeersDetailActivity extends BaseActivity implements BeersDetailCont
         mTextViewSubTitle.setText(mBeer.getTagLine());
         mTextViewDescription.setText(mBeer.getDescription());
         mImageButtonFavorite.setOnClickListener(this::onFavoriteIconClick);
+
+        if (mBeer.isFavorite()) {
+            showFavoriteIcon();
+
+        } else {
+            removeFavoriteIcon();
+        }
     }
 
     @Override
@@ -112,15 +124,10 @@ public class BeersDetailActivity extends BaseActivity implements BeersDetailCont
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        loadBeerDetails();
-
-        if (mBeer.isFavorite()) {
-            showFavoriteIcon();
-
-        } else {
-            removeFavoriteIcon();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
         }
+        return true;
     }
 }
