@@ -102,14 +102,14 @@ public class BeersDetailActivity extends BaseActivity implements BeersDetailCont
 
     @Override
     public void showFavoriteIcon() {
-        mImageButtonFavorite.setBackgroundResource(0);
-        mImageButtonFavorite.setBackgroundResource(R.drawable.ic_favorite_scale_yellow);
+        mImageButtonFavorite.setImageResource(0);
+        mImageButtonFavorite.setImageResource(R.drawable.ic_favorite_scale_yellow);
     }
 
     @Override
     public void removeFavoriteIcon() {
-        mImageButtonFavorite.setBackgroundResource(0);
-        mImageButtonFavorite.setBackgroundResource(R.drawable.ic_favorite_scale);
+        mImageButtonFavorite.setImageResource(0);
+        mImageButtonFavorite.setImageResource(R.drawable.ic_favorite_scale);
     }
 
     public void onFavoriteIconClick(View view) {
