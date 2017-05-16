@@ -96,11 +96,8 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
         holder.mTextViewBeerTitle.setText(beerItem.getName());
         holder.mTextViewBeerSubTitle.setText(beerItem.getTagLine());
 
-        holder.containerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnBeerClickListener != null) mOnBeerClickListener.beerClicked(beerItem);
-            }
+        holder.containerView.setOnClickListener(v -> {
+            if (mOnBeerClickListener != null) mOnBeerClickListener.beerClicked(beerItem);
         });
     }
 

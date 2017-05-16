@@ -34,7 +34,7 @@ public interface BeersDataSource {
     /**
      * This interface is for local repositories that wants save beers locally
      */
-    interface OnSaveBeers {
+    interface BeersLocalDataSource extends BeersDataSource {
         /**
          * Save a list of beers on repository
          *

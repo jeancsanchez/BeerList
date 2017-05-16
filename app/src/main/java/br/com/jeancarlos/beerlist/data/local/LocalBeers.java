@@ -15,15 +15,15 @@ import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 /**
- * Concrete implementation of a {@link BeersDataSource} as a db
+ * Concrete implementation of a {@link BeersLocalDataSource} and  as a db
  *
  * @author Jean Carlos
  * @since 5/10/17
  */
 
 @Singleton
-public class LocalBeers implements BeersDataSource, BeersDataSource.OnSaveBeers {
-    private Context context;
+public class LocalBeers implements BeersDataSource.BeersLocalDataSource {
+
     private Realm mRealm;
 
     @Inject

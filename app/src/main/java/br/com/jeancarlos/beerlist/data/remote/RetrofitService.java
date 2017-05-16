@@ -28,6 +28,7 @@ public interface RetrofitService {
     @GET("beers")
     Call<List<Beer>> getBeers();
 
+
     /**
      * Returns all beers matching the supplied name (this will match partial strings as well
      * so e.g punk will return Punk IPA), if you need to add spaces just add an underscore (_).
@@ -39,6 +40,7 @@ public interface RetrofitService {
     @GET("beers")
     Call<List<Beer>> searchBeerByName(@Query("beer_name") String query);
 
+
     /**
      * This class helps set up a new Retrofit Service
      */
@@ -47,7 +49,6 @@ public interface RetrofitService {
 
         /**
          * Return a single instance of {@link RetrofitService}
-         *
          * @return A new instance of {@link RetrofitService}
          */
         public static RetrofitService newRetrofitService() {

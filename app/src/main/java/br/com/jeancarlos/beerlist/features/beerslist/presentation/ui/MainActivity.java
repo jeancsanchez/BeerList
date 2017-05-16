@@ -96,12 +96,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
      */
     private void setupRefresh() {
         mSwipeRefresh.setColorSchemeColors(getColorPrimary(), getColorPrimaryDark());
-        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mBeersPresenter.refreshBeers();
-            }
-        });
+        mSwipeRefresh.setOnRefreshListener(() -> mBeersPresenter.refreshBeers());
     }
 
     /**
@@ -254,6 +249,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
     /**
      * Method that saves the queries typed by user on list of the recent searches
+     *
      * @param query The text typed by user
      */
     private void saveRecentQuery(String query) {

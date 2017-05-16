@@ -17,12 +17,12 @@ import br.com.jeancarlos.beerlist.injection.scopes.Remote;
  * @since 5/10/17
  */
 
-public class BeersRepository implements BeersDataSource {
+public class BeersRepository implements BeersDataSource, BeersDataSource.BeersLocalDataSource {
     private final BeersDataSource mRemoteBeers;
-    private final BeersDataSource mLocalBeers;
+    private final BeersLocalDataSource mLocalBeers;
 
     @Inject
-    BeersRepository(@Remote BeersDataSource remoteBeers, @Local BeersDataSource localBeers) {
+    BeersRepository(@Remote BeersDataSource remoteBeers, @Local BeersLocalDataSource localBeers) {
         mRemoteBeers = remoteBeers;
         mLocalBeers = localBeers;
     }
