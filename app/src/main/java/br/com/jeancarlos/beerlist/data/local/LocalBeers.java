@@ -13,6 +13,7 @@ import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  * Concrete implementation of a {@link BeersLocalDataSource} and  as a db
@@ -35,7 +36,7 @@ public class LocalBeers implements BeersDataSource.BeersLocalDataSource {
     @Override
     public void fetchBeers(@NonNull FetchBeersCallback callback) {
         RealmQuery<Beer> query = mRealm.where(Beer.class);
-        RealmResults<Beer> results = query.findAll();
+        RealmResults<Beer> results = query.findAllSorted("name", Sort.ASCENDING);
 
         if (results.size() == 0) {
             callback.onBeersNotAvailable();
@@ -77,7 +78,7 @@ public class LocalBeers implements BeersDataSource.BeersLocalDataSource {
         RealmQuery realmQuery = mRealm.where(Beer.class);
         realmQuery.equalTo("isFavorite", true);
 
-        RealmResults<Beer> results = realmQuery.findAll();
+        RealmResults<Beer> results = realmQuery.findAllSorted("name", Sort.ASCENDING);
 
         if (results.size() > 0)
             favoriteBeersCallback.onFavoriteBeersFetched(results);
