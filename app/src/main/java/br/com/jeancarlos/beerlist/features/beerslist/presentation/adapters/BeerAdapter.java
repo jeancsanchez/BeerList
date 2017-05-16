@@ -79,27 +79,52 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
         return new BeerViewHolder(view);
     }
 
+    /**
+     * Set the beer item click listener
+     *
+     * @param onBeerItemClickedListener A callback listener for handle the beer item click
+     */
     public void setOnBeerItemClickedListener(OnBeerItemClickedListener onBeerItemClickedListener) {
         this.mOnBeerClickListener = onBeerItemClickedListener;
     }
 
     @Override
     public void onBindViewHolder(BeerViewHolder holder, int position) {
-        final Beer beerItem = mBeersList.get(position);
 
-        // Load beer's cover image
-        Picasso.with(mContext)
-                .load(beerItem.getImageUrl())
-                .placeholder(R.drawable.icon_star)
-                .into(holder.mImageViewBeerCover);
+        // Set favorite beers on top
+        if (position == 0) {
+            Picasso.with(mContext)
+                    .load(R.drawable.ic_favorite)
+                    .into(holder.mImageViewBeerCover);
 
-        holder.mTextViewBeerTitle.setText(beerItem.getName());
-        holder.mTextViewBeerSubTitle.setText(beerItem.getTagLine());
+            holder.mTextViewBeerTitle.setText(mContext.getResources().getString(
+                    R.string.favorites_title));
+            holder.mTextViewBeerSubTitle.setText(mContext.getResources().getString(
+                    R.string.favorites_sub_title));
+            holder.containerView.setOnClickListener(this::onFavoritesClick);
 
-        holder.containerView.setOnClickListener(v -> {
-            if (mOnBeerClickListener != null) mOnBeerClickListener.beerClicked(beerItem);
-        });
+        } else {
+            final Beer beerItem = mBeersList.get(position);
+
+            // Load beer's cover image
+            Picasso.with(mContext)
+                    .load(beerItem.getImageUrl())
+                    .placeholder(R.drawable.icon_star)
+                    .into(holder.mImageViewBeerCover);
+
+            holder.mTextViewBeerTitle.setText(beerItem.getName());
+            holder.mTextViewBeerSubTitle.setText(beerItem.getTagLine());
+
+            holder.containerView.setOnClickListener(v -> {
+                if (mOnBeerClickListener != null) mOnBeerClickListener.beerClicked(beerItem);
+            });
+        }
     }
+
+    private void onFavoritesClick(View view) {
+
+    }
+
 
     @Override
     public int getItemCount() {

@@ -44,17 +44,37 @@ public class MainActivityTest {
     }
 
 
-    // Clicks on first item of list and show the details of it.
+    // Clicks on second item of list and show the details of it.
     @Test
-    public void clickOnFirstItemOfListAndShowDetails() {
+    public void clicksOnSecondItemOfListAndShowDetails() {
 
         // Populate de RecyclerView with fake data
-        mMainActivityTestRule.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mMainActivityTestRule.getActivity().showBeers(BEERS);
-            }
-        });
+        mMainActivityTestRule.getActivity().runOnUiThread(() ->
+                mMainActivityTestRule.getActivity().showBeers(BEERS));
+
+        // Check if 'data not found' message is not showing
+        onView(withId(R.id.linear_layout_not_found_error))
+                .check(matches(not(isDisplayed())));
+
+        // Click on the second item
+        onView(withId(R.id.recycler_view_beers))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+
+        // Check if details screen is showing item details
+        onView(withId(R.id.text_beer_title_detail))
+                .check(matches(isDisplayed()))
+                .check(matches(withText(BEERS.get(1).getName())));
+
+
+    }
+
+    // Clicks on favorites item and show favorites list
+    @Test
+    public void clicksOnFavoritesItemAndShowFavorites() {
+
+        // Populate de RecyclerView with fake data
+        mMainActivityTestRule.getActivity().runOnUiThread(() ->
+                mMainActivityTestRule.getActivity().showBeers(BEERS));
 
         // Check if 'data not found' message is not showing
         onView(withId(R.id.linear_layout_not_found_error))
@@ -64,11 +84,10 @@ public class MainActivityTest {
         onView(withId(R.id.recycler_view_beers))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-        // Check if details screen is showing item details
+        // Check if favorite screen is showing
         onView(withId(R.id.text_beer_title_detail))
                 .check(matches(isDisplayed()))
                 .check(matches(withText(BEERS.get(0).getName())));
-
 
     }
 

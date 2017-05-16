@@ -4,4 +4,6 @@
     <string name="message_connection_error">A lista atual talvez esteja desatualizada. Verifique sua conexão.</string>
     <string name="title_search_view_beer">Procurar cerveja…</string>
     <string name="not_found_error">Nenhum resultado foi encontrado</string>
+    <string name="favorites_title">Favoritos</string>
+    <string name="favorites_sub_title">Suas bebidas favoritas!</string>
 </resources>
