@@ -147,6 +147,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
     @Override
     public void showBeersSearchResult(List<Beer> beers) {
+        mBeerAdapter.canShowFavoritesItem(false);
         mBeerAdapter.updateFilterList(beers);
 
         if (beers.size() == 0) {

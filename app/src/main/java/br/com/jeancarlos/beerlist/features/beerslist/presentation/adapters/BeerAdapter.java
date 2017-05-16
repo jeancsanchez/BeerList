@@ -147,7 +147,7 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
      *
      * @param canShow A boolean for set if can show or not
      */
-    protected void canShowFavoritesItem(boolean canShow) {
+    public void canShowFavoritesItem(boolean canShow) {
         this.mCanShowFavoritesItem = canShow;
     }
 
