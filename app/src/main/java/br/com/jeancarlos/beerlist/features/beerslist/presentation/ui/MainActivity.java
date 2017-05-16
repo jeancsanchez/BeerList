@@ -29,6 +29,7 @@ import br.com.jeancarlos.beerlist.features.beerslist.presentation.BeersListContr
 import br.com.jeancarlos.beerlist.features.beerslist.presentation.adapters.BeerAdapter;
 import br.com.jeancarlos.beerlist.features.beerslist.presentation.helpers.BeerHelper;
 import br.com.jeancarlos.beerlist.features.beerslist.presentation.presenters.BeersPresenter;
+import br.com.jeancarlos.beerlist.features.favorites.presentation.ui.FavoritesActivity;
 import br.com.jeancarlos.beerlist.injection.components.DaggerBeerPresenterComponent;
 import br.com.jeancarlos.beerlist.injection.modules.BeerPresenterModule;
 import br.com.jeancarlos.beerlist.util.NetworkUtil;
@@ -44,7 +45,8 @@ import butterknife.ButterKnife;
  * </p>
  */
 public class MainActivity extends BaseActivity implements BeersListContract.View,
-        BeersListContract.View.OnBeerItemClickedListener, SearchView.OnQueryTextListener {
+        BeersListContract.View.OnBeerItemClickedListener, SearchView.OnQueryTextListener,
+        BeersListContract.View.OnFavoritesItemClickedListener {
 
     @BindView(R.id.recycler_view_beers)
     RecyclerView mRecyclerViewBeers;
@@ -105,6 +107,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     private void createAdapter() {
         mBeerAdapter = new BeerAdapter(MainActivity.this);
         mBeerAdapter.setOnBeerItemClickedListener(MainActivity.this);
+        mBeerAdapter.setOnFavoritesItemClickedListener(MainActivity.this);
 
         mRecyclerViewBeers.setLayoutManager(
                 new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
@@ -185,6 +188,11 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
         } else {
             mLinearMessageNotFound.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void favoritesClicked() {
+        startActivity(new Intent(this, FavoritesActivity.class));
     }
 
     @Override

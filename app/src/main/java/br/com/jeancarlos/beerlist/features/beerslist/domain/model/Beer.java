@@ -21,27 +21,21 @@ import io.realm.annotations.PrimaryKey;
 
 public class Beer extends RealmObject implements Parcelable {
 
-    public static final Creator<Beer> CREATOR = new Creator<Beer>() {
-        @Override
-        public Beer createFromParcel(Parcel in) {
-            return new Beer(in);
-        }
-
-
-        @Override
-        public Beer[] newArray(int size) {
-            return new Beer[size];
-        }
-    };
     @PrimaryKey
     private int id;
+
     private String name;
+
     @SerializedName("tagline")
     private String tagLine;
+
     @SerializedName("description")
     private String description;
+
     @SerializedName("image_url")
     private String imageUrl;
+
+    private boolean isFavorite;
 
     /**
      * Default constructor
@@ -75,6 +69,7 @@ public class Beer extends RealmObject implements Parcelable {
         tagLine = in.readString();
         description = in.readString();
         imageUrl = in.readString();
+        isFavorite = in.readInt() == 1;
     }
 
     public double getId() {
@@ -101,6 +96,29 @@ public class Beer extends RealmObject implements Parcelable {
         return imageUrl;
     }
 
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
+
+
+    // Parcelable implementation - BEGIN
+    public static final Creator<Beer> CREATOR = new Creator<Beer>() {
+        @Override
+        public Beer createFromParcel(Parcel in) {
+            return new Beer(in);
+        }
+
+
+        @Override
+        public Beer[] newArray(int size) {
+            return new Beer[size];
+        }
+    };
+
     @Override
     public int describeContents() {
         return 0;
@@ -113,8 +131,9 @@ public class Beer extends RealmObject implements Parcelable {
         dest.writeString(tagLine);
         dest.writeString(description);
         dest.writeString(imageUrl);
+        dest.writeInt(isFavorite ? 1 : 0);
     }
-
+    // Parcelable implementation - END
 
     @Override
     public boolean equals(Object object) {

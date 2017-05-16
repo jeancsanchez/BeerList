@@ -61,4 +61,24 @@ public class LocalBeers implements BeersDataSource.BeersLocalDataSource {
         mRealm.insertOrUpdate(beers);
         mRealm.commitTransaction();
     }
+
+    @Override
+    public void saveFavoriteBeer(Beer beer) {
+        mRealm.beginTransaction();
+        mRealm.insertOrUpdate(beer);
+        mRealm.commitTransaction();
+    }
+
+    @Override
+    public void getFavoriteBeers(FavoriteBeersCallback favoriteBeersCallback) {
+        RealmQuery realmQuery = mRealm.where(Beer.class);
+        realmQuery.equalTo("isFavorite", true);
+
+        RealmResults<Beer> results = realmQuery.findAll();
+
+        if (results.size() > 0)
+            favoriteBeersCallback.onFavoriteBeersFetched(results);
+        else
+            favoriteBeersCallback.onFavoriteBeersNotFound();
+    }
 }

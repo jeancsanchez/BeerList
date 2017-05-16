@@ -8,4 +8,5 @@
     <string name="favorites_title">Favorites</string>
     <string name="favorites_sub_title">Your favorite beers!</string>
     <string name="favorite_this_beer">Favorite this beer</string>
+    <string name="favorites_not_found_message">No beer was favored</string>
 </resources>

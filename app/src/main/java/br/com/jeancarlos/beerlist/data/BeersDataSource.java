@@ -41,6 +41,21 @@ public interface BeersDataSource {
          * @param beers A list of beers to be save
          */
         void saveBeers(List<Beer> beers);
+
+        /**
+         * Save a favorite beer
+         *
+         * @param beer A {@link Beer}
+         */
+        void saveFavoriteBeer(Beer beer);
+
+
+        /**
+         * Get a list of favorite beers
+         *
+         * @param favoriteBeersCallback A callback for handle favorite beers data
+         */
+        void getFavoriteBeers(FavoriteBeersCallback favoriteBeersCallback);
     }
 
 
@@ -65,5 +80,15 @@ public interface BeersDataSource {
         void onSearchBeerSuccess(List<Beer> beers);
 
         void onSearchBeerFailure();
+    }
+
+    /**
+     * This interface is a callback for handle data from {@link BeersLocalDataSource#getFavoriteBeers(FavoriteBeersCallback)}
+     */
+    interface FavoriteBeersCallback {
+
+        void onFavoriteBeersFetched(List<Beer> beers);
+
+        void onFavoriteBeersNotFound();
     }
 }

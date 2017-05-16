@@ -66,14 +66,12 @@ public interface BeersListContract {
         /**
          * This interface is a callback for handle click on beer item
          */
-        interface OnBeerItemClickedListener {
+        interface OnFavoritesItemClickedListener {
 
             /**
-             * Callback for handle beer click
-             *
-             * @param beer Beer clicked
+             * Callback for click on favorites item
              */
-            void beerClicked(Beer beer);
+            void favoritesClicked();
         }
     }
 

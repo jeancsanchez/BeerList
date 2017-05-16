@@ -14,10 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.jeancarlos.beerlist.R;
+import br.com.jeancarlos.beerlist.base.BaseView.OnBeerItemClickedListener;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
-import br.com.jeancarlos.beerlist.features.beerslist.presentation.BeersListContract.View.OnBeerItemClickedListener;
+import br.com.jeancarlos.beerlist.features.beerslist.presentation.BeersListContract.View.OnFavoritesItemClickedListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
 /**
  * This class represents a item Beer on {@link android.support.v7.widget.RecyclerView}
@@ -31,6 +34,7 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
     private List<Beer> mBeersList;
     private List<Beer> mOriginalListFilter = new ArrayList<>();
     private OnBeerItemClickedListener mOnBeerClickListener;
+    private OnFavoritesItemClickedListener mOnFavoritesClickListener;
 
 
     public BeerAdapter(Context context) {
@@ -88,6 +92,15 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
         this.mOnBeerClickListener = onBeerItemClickedListener;
     }
 
+    /**
+     * Set the favorites item click listener
+     *
+     * @param onFavoritesItemClickedListener A callback listener for handle the favorites item click
+     */
+    public void setOnFavoritesItemClickedListener(OnFavoritesItemClickedListener onFavoritesItemClickedListener) {
+        this.mOnFavoritesClickListener = onFavoritesItemClickedListener;
+    }
+
     @Override
     public void onBindViewHolder(BeerViewHolder holder, int position) {
 
@@ -116,13 +129,15 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
             holder.mTextViewBeerSubTitle.setText(beerItem.getTagLine());
 
             holder.containerView.setOnClickListener(v -> {
-                if (mOnBeerClickListener != null) mOnBeerClickListener.beerClicked(beerItem);
+                checkNotNull(mOnBeerClickListener);
+                mOnBeerClickListener.beerClicked(beerItem);
             });
         }
     }
 
     private void onFavoritesClick(View view) {
-
+        checkNotNull(mOnFavoritesClickListener);
+        mOnFavoritesClickListener.favoritesClicked();
     }
 
 

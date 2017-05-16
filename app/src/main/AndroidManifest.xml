@@ -13,7 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <provider
             android:name=".util.SuggestionProvider"
             android:authorities="br.com.jeancarlos.beerlist.util.SuggestionProvider" />
@@ -24,6 +23,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -31,7 +31,6 @@
         <activity
             android:name=".features.beersdetail.presentation.BeersDetailActivity"
             android:parentActivityName=".features.beerslist.presentation.ui.MainActivity">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".features.beerslist.presentation.ui.MainActivity" />
@@ -44,6 +43,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".features.favorites.presentation.ui.FavoritesActivity"
+            android:parentActivityName=".features.beerslist.presentation.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".features.beerslist.presentation.ui.MainActivity" />
         </activity>
     </application>
 
