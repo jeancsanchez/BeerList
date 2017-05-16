@@ -19,7 +19,6 @@ import br.com.jeancarlos.beerlist.features.favorites.presentation.ui.FavoritesAc
  */
 
 public class FavoritePresenter implements FavoritesContract.Presenter {
-
     private final ShowFavoritesUseCase mShowFavoriteUseCase;
     private final FavoritesContract.View mView;
 

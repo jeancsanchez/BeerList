@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist.data.beerlist;
+package br.com.jeancarlos.beerlist.data;
 
 import org.junit.Before;
 import org.junit.Test;

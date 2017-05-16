@@ -37,14 +37,19 @@ import static org.mockito.Mockito.verify;
 public class BeerPresenterTest {
 
     private static List<Beer> BEERS;
+
     @Mock
     BeersRepository mBeerRepository;
+
     @Mock
     GetAllBeersUseCase mGetAllBeersUseCase;
+
     @Mock
     GetBeerByNameUseCase mGetBeerByNameUseCase;
+
     @Mock
     BeersListContract.View mBeerContractView;
+
     @InjectMocks
     BeersPresenter mBeersPresenter;
     /**

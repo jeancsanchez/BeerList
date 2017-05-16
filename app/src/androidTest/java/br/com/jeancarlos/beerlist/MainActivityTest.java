@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
@@ -34,13 +33,14 @@ import static org.hamcrest.Matchers.not;
 public class MainActivityTest {
 
     private static List<Beer> BEERS;
+
     @Rule
     public ActivityTestRule<MainActivity> mMainActivityTestRule =
             new ActivityTestRule<MainActivity>(MainActivity.class);
 
     @Before
     public void setUp() {
-        createFakeBeersList();
+        BEERS = FakeBeerList.getFakeBeers();
     }
 
 
@@ -64,8 +64,6 @@ public class MainActivityTest {
         onView(withId(R.id.text_beer_title_detail))
                 .check(matches(isDisplayed()))
                 .check(matches(withText(BEERS.get(1).getName())));
-
-
     }
 
     // Clicks on favorites item and show favorites list
@@ -89,15 +87,5 @@ public class MainActivityTest {
                 .check(matches(isDisplayed()))
                 .check(matches(withText(BEERS.get(0).getName())));
 
-    }
-
-    /**
-     * Creates a fake beer list
-     */
-    private void createFakeBeersList() {
-        BEERS = new ArrayList<>();
-        BEERS.add(new Beer(1, "bee1"));
-        BEERS.add(new Beer(2, "bee2"));
-        BEERS.add(new Beer(3, "beer3"));
     }
 }
