@@ -2,13 +2,13 @@ package com.example.data;
 
 import android.support.annotation.NonNull;
 
+import com.example.data.local.Local;
+import com.example.data.remote.Remote;
+import com.example.domain.models.Beer;
+
 import java.util.List;
 
 import javax.inject.Inject;
-
-import br.com.jeancarlos.beerlist.di.scopes.Local;
-import br.com.jeancarlos.beerlist.di.scopes.Remote;
-import com.example.domain.models.Beer;
 
 /**
  * Concrete implementation of a {@link BeersDataSource} as a {@link Beer} repository.
@@ -17,12 +17,12 @@ import com.example.domain.models.Beer;
  * @since 5/10/17
  */
 
-public class BeersRepository implements BeersDataSource, BeersDataSource.BeersLocalDataSource {
+public class BeersRepositoryImpl implements BeersDataSource, BeersDataSource.BeersLocalDataSource {
     private final BeersDataSource mRemoteBeers;
     private final BeersLocalDataSource mLocalBeers;
 
     @Inject
-    BeersRepository(@Remote BeersDataSource remoteBeers, @Local BeersLocalDataSource localBeers) {
+    BeersRepositoryImpl(@Remote BeersDataSource remoteBeers, @Local BeersLocalDataSource localBeers) {
         mRemoteBeers = remoteBeers;
         mLocalBeers = localBeers;
     }

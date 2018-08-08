@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.domain.models.Beer;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -15,7 +17,6 @@ import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.base.BaseActivity;
 import br.com.jeancarlos.beerlist.base.BaseView;
 import br.com.jeancarlos.beerlist.features.beersdetail.BeersDetailActivity;
-import com.example.domain.models.Beer;
 import br.com.jeancarlos.beerlist.features.beerslist.helpers.BeerHelper;
 import br.com.jeancarlos.beerlist.features.favorites.adapters.FavoriteAdapter;
 import butterknife.BindView;

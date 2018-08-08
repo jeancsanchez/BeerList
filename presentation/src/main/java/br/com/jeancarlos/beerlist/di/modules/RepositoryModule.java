@@ -1,10 +1,13 @@
 package br.com.jeancarlos.beerlist.di.modules;
 
 import com.example.data.BeersDataSource;
+import com.example.data.BeersRepositoryImpl;
+import com.example.data.local.Local;
 import com.example.data.local.LocalBeers;
+import com.example.data.remote.Remote;
 import com.example.data.remote.RemoteBeers;
-import br.com.jeancarlos.beerlist.di.scopes.Local;
-import br.com.jeancarlos.beerlist.di.scopes.Remote;
+import com.example.domain.BeersRepository;
+
 import dagger.Binds;
 import dagger.Module;
 
@@ -23,4 +26,8 @@ public abstract class RepositoryModule {
     @Binds
     @Remote
     abstract BeersDataSource provideRemoteBeersData(RemoteBeers remoteBeers);
+
+
+    @Binds
+    abstract BeersRepository providesBeersRepository(BeersRepositoryImpl beersRepository);
 }

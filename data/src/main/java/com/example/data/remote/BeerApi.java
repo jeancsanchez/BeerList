@@ -17,7 +17,7 @@ import retrofit2.http.Query;
  * @since 5/12/17
  */
 
-public interface RetrofitService {
+public interface BeerApi {
     String ENDPOINT = "https://api.punkapi.com/v2/";
 
     /**
@@ -50,6 +50,7 @@ public interface RetrofitService {
 
         /**
          * Return a single instance of {@link BeerApi}
+         *
          * @return A new instance of {@link BeerApi}
          */
         public static BeerApi newRetrofitService() {

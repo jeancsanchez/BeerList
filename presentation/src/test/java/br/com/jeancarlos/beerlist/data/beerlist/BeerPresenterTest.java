@@ -1,5 +1,11 @@
 package br.com.jeancarlos.beerlist.data.beerlist;
 
+import com.example.data.BeersDataSource;
+import com.example.data.BeersRepositoryImpl;
+import com.example.domain.models.Beer;
+import com.example.domain.usecases.GetAllBeersUseCase;
+import com.example.domain.usecases.GetBeerByNameUseCase;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,11 +19,6 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.data.BeersDataSource;
-import com.example.data.BeersRepository;
-import com.example.domain.models.Beer;
-import com.example.domain.usecases.GetAllBeersUseCase;
-import com.example.domain.usecases.GetBeerByNameUseCase;
 import br.com.jeancarlos.beerlist.features.beerslist.BeersListContract;
 import br.com.jeancarlos.beerlist.features.beerslist.BeersPresenter;
 
@@ -39,7 +40,7 @@ public class BeerPresenterTest {
     private static List<Beer> BEERS;
 
     @Mock
-    BeersRepository mBeerRepository;
+    BeersRepositoryImpl mBeerRepository;
 
     @Mock
     GetAllBeersUseCase mGetAllBeersUseCase;

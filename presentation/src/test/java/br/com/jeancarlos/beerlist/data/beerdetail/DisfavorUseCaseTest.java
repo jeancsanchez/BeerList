@@ -1,14 +1,14 @@
 package br.com.jeancarlos.beerlist.data.beerdetail;
 
+import com.example.data.BeersRepositoryImpl;
+import com.example.domain.models.Beer;
+import com.example.domain.usecases.DisfavorUseCase;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import com.example.data.BeersRepository;
-import com.example.domain.usecases.DisfavorUseCase;
-import com.example.domain.models.Beer;
 
 import static junit.framework.Assert.assertFalse;
 import static org.mockito.Mockito.verify;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public class DisfavorUseCaseTest {
     @Mock
-    private BeersRepository mBeerRepository;
+    private BeersRepositoryImpl mBeerRepository;
 
     @InjectMocks
     private DisfavorUseCase mDisfavorUseCase;

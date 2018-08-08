@@ -1,5 +1,9 @@
 package br.com.jeancarlos.beerlist.data.favorites;
 
+import com.example.data.BeersDataSource;
+import com.example.data.BeersRepositoryImpl;
+import com.example.domain.usecases.ShowFavoritesUseCase;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -7,10 +11,6 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import com.example.data.BeersDataSource;
-import com.example.data.BeersRepository;
-import com.example.domain.usecases.ShowFavoritesUseCase;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 public class ShowFavoritesUseCaseTest {
 
     @Mock
-    private BeersRepository mBeerRepository;
+    private BeersRepositoryImpl mBeerRepository;
 
     @InjectMocks
     private ShowFavoritesUseCase mShowFavoritesUseCase;

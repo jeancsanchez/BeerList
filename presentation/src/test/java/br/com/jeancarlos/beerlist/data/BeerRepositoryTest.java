@@ -1,5 +1,10 @@
 package br.com.jeancarlos.beerlist.data;
 
+import com.example.data.BeersDataSource;
+import com.example.data.BeersRepositoryImpl;
+import com.example.data.local.LocalBeers;
+import com.example.data.remote.RemoteBeers;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,15 +14,10 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.example.data.BeersDataSource;
-import com.example.data.BeersRepository;
-import com.example.data.local.LocalBeers;
-import com.example.data.remote.RemoteBeers;
-
 import static org.mockito.Mockito.verify;
 
 /**
- * This class makes tests for {@link BeersRepository}
+ * This class makes tests for {@link BeersRepositoryImpl}
  *
  * @author Jean Carlos
  * @since 5/12/17
@@ -36,19 +36,19 @@ public class BeerRepositoryTest {
     @Mock
     private LocalBeers mLocalBeers;
 
-    private BeersRepository mBeersRepository;
+    private BeersRepositoryImpl mBeersRepositoryImpl;
 
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mBeersRepository = new BeersRepository(mRemoteBeers, mLocalBeers);
+        mBeersRepositoryImpl = new BeersRepositoryImpl(mRemoteBeers, mLocalBeers);
     }
 
 
     @Test
     public void fetchBeers() {
-        mBeersRepository.fetchBeers(mFetchBeerCallbackCaptor.capture());
+        mBeersRepositoryImpl.fetchBeers(mFetchBeerCallbackCaptor.capture());
 
         // Call local beers first
         verify(mLocalBeers).fetchBeers(mFetchBeerCallbackCaptor.capture());

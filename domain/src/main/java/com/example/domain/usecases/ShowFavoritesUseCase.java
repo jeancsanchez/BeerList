@@ -2,12 +2,10 @@ package com.example.domain.usecases;
 
 import android.support.annotation.NonNull;
 
+import com.example.domain.BeersDataSource;
 import com.example.domain.BeersRepository;
 
 import javax.inject.Inject;
-
-import br.com.jeancarlos.beerlist.data.BeersDataSource;
-import br.com.jeancarlos.beerlist.data.BeersRepository;
 
 /**
  * This use case handles showing all favorite beers

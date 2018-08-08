@@ -1,13 +1,13 @@
 package br.com.jeancarlos.beerlist.data.beerlist;
 
+import com.example.data.BeersDataSource;
+import com.example.data.BeersRepositoryImpl;
+import com.example.domain.usecases.GetBeerByNameUseCase;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import com.example.data.BeersDataSource;
-import com.example.data.BeersRepository;
-import com.example.domain.usecases.GetBeerByNameUseCase;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public class GetBeerByNameUseCaseTest {
     @Mock
-    private BeersRepository mBeerRepository;
+    private BeersRepositoryImpl mBeerRepository;
 
     @Mock
     private BeersDataSource.SearchBeerCallback mSearchBeerCallback;

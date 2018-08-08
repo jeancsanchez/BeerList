@@ -3,7 +3,7 @@ package com.example.data.remote;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.example.data.BeersDataSource;
+import com.example.domain.BeersDataSource;
 import com.example.domain.models.Beer;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class RemoteBeers implements BeersDataSource {
     }
 
     @Override
-    public void fetchBeers(@NonNull final FetchBeersCallback callback) {
+    public void fetchBeers(@NonNull final BeersDataSource.FetchBeersCallback callback) {
         mBeerApi.getBeers()
                 .enqueue(new Callback<List<Beer>>() {
                     @Override

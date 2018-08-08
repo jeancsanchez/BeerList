@@ -1,13 +1,14 @@
 package br.com.jeancarlos.beerlist.features.favorites;
 
+import com.example.domain.BeersDataSource;
+import com.example.domain.models.Beer;
+import com.example.domain.usecases.ShowFavoritesUseCase;
+
 import java.util.List;
 
 import javax.inject.Inject;
 
 import br.com.jeancarlos.beerlist.base.BaseView;
-import com.example.data.BeersDataSource;
-import com.example.domain.models.Beer;
-import com.example.domain.usecases.ShowFavoritesUseCase;
 
 /**
  * This class represents a presenter for {@link FavoritesActivity} and is a concrete implementation of

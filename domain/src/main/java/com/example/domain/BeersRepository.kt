@@ -6,5 +6,4 @@ package com.example.domain
  * @date 08/08/18.
  * Jesus is alive!
  */
-interface BeersRepository {
-}
+interface BeersRepository : BeersDataSource, BeersDataSource.BeersLocalDataSource

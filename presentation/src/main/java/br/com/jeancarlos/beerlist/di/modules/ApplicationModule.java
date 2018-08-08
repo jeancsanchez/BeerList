@@ -2,13 +2,14 @@ package br.com.jeancarlos.beerlist.di.modules;
 
 import android.content.Context;
 
-import com.example.data.BeersRepository;
+import com.example.data.BeersRepositoryImpl;
+
 import dagger.Module;
 import dagger.Provides;
 
 /**
  * This is a Dagger module. We use this to pass in the Context dependency to the
- * {@link BeersRepository}.
+ * {@link BeersRepositoryImpl}.
  *
  * @author Jean Carlos
  * @since 5/10/17

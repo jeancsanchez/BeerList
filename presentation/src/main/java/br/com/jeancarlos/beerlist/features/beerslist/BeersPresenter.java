@@ -1,15 +1,16 @@
 package br.com.jeancarlos.beerlist.features.beerslist;
 
+import com.example.domain.BeersDataSource;
+import com.example.domain.models.Beer;
+import com.example.domain.usecases.GetAllBeersUseCase;
+import com.example.domain.usecases.GetBeerByNameUseCase;
+
 import java.util.List;
 
 import javax.inject.Inject;
 
 import br.com.jeancarlos.beerlist.base.BaseView;
-import com.example.data.BeersDataSource;
 import br.com.jeancarlos.beerlist.di.scopes.PearActivity;
-import com.example.domain.models.Beer;
-import com.example.domain.usecases.GetAllBeersUseCase;
-import com.example.domain.usecases.GetBeerByNameUseCase;
 
 /**
  * This class represents a presenter for {@link MainActivity} and is a concrete implementation of

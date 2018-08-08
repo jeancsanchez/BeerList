@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist.di.scopes;
+package com.example.data.local;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import javax.inject.Qualifier;
 
 /**
- * This is a Dagger scope to identify Remote repository
+ * This is a Dagger scope to identify Local repository
  *
  * @author Jean Carlos
  * @since 5/10/17
@@ -16,5 +16,5 @@ import javax.inject.Qualifier;
 @Qualifier
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Remote {
+public @interface Local {
 }
