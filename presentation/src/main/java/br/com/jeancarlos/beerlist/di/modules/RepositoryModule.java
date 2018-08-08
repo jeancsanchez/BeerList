@@ -1,11 +1,11 @@
 package br.com.jeancarlos.beerlist.di.modules;
 
-import com.example.data.BeersDataSource;
 import com.example.data.BeersRepositoryImpl;
 import com.example.data.local.Local;
 import com.example.data.local.LocalBeers;
 import com.example.data.remote.Remote;
 import com.example.data.remote.RemoteBeers;
+import com.example.domain.BeersDataSource;
 import com.example.domain.BeersRepository;
 
 import dagger.Binds;

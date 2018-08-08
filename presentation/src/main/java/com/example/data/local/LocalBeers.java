@@ -3,13 +3,14 @@ package com.example.data.local;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.example.domain.BeersDataSource;
+import com.example.domain.models.Beer;
+
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import com.example.data.BeersDataSource;
-import com.example.domain.models.Beer;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;

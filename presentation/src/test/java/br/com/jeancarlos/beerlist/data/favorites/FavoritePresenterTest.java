@@ -1,5 +1,8 @@
 package br.com.jeancarlos.beerlist.data.favorites;
 
+import com.example.domain.models.Beer;
+import com.example.domain.usecases.ShowFavoritesUseCase;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,11 +16,8 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.data.BeersDataSource;
-import com.example.domain.models.Beer;
-import com.example.domain.usecases.ShowFavoritesUseCase;
-import br.com.jeancarlos.beerlist.features.favorites.FavoritesContract;
 import br.com.jeancarlos.beerlist.features.favorites.FavoritePresenter;
+import br.com.jeancarlos.beerlist.features.favorites.FavoritesContract;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;

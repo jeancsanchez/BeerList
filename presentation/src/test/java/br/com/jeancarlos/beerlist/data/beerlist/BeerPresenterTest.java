@@ -1,7 +1,5 @@
 package br.com.jeancarlos.beerlist.data.beerlist;
 
-import com.example.data.BeersDataSource;
-import com.example.data.BeersRepositoryImpl;
 import com.example.domain.models.Beer;
 import com.example.domain.usecases.GetAllBeersUseCase;
 import com.example.domain.usecases.GetBeerByNameUseCase;
@@ -40,7 +38,7 @@ public class BeerPresenterTest {
     private static List<Beer> BEERS;
 
     @Mock
-    BeersRepositoryImpl mBeerRepository;
+    BeersRepository mBeerRepository;
 
     @Mock
     GetAllBeersUseCase mGetAllBeersUseCase;

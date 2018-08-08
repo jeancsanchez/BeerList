@@ -1,6 +1,5 @@
 package br.com.jeancarlos.beerlist.data;
 
-import com.example.data.BeersDataSource;
 import com.example.data.BeersRepositoryImpl;
 import com.example.data.local.LocalBeers;
 import com.example.data.remote.RemoteBeers;

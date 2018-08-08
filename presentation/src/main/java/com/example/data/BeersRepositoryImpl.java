@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 
 import com.example.data.local.Local;
 import com.example.data.remote.Remote;
+import com.example.domain.BeersDataSource;
+import com.example.domain.BeersRepository;
 import com.example.domain.models.Beer;
 
 import java.util.List;
@@ -17,7 +19,7 @@ import javax.inject.Inject;
  * @since 5/10/17
  */
 
-public class BeersRepositoryImpl implements BeersDataSource, BeersDataSource.BeersLocalDataSource {
+public class BeersRepositoryImpl implements BeersRepository {
     private final BeersDataSource mRemoteBeers;
     private final BeersLocalDataSource mLocalBeers;
 
@@ -32,8 +34,7 @@ public class BeersRepositoryImpl implements BeersDataSource, BeersDataSource.Bee
         // Fetch locally first
         mLocalBeers.fetchBeers(callback);
 
-
-        mRemoteBeers.fetchBeers(new FetchBeersCallback() {
+        mRemoteBeers.fetchBeers(new BeersDataSource.FetchBeersCallback() {
             @Override
             public void onBeersFetched(List<Beer> beers) {
                 callback.onBeersFetched(beers);
@@ -57,8 +58,8 @@ public class BeersRepositoryImpl implements BeersDataSource, BeersDataSource.Bee
     @Override
     public void searchBeerByName(String query, @NonNull SearchBeerCallback callback) {
         mRemoteBeers.searchBeerByName(query, callback);
-    }
 
+    }
 
     @Override
     public void saveBeers(List<Beer> beers) {
