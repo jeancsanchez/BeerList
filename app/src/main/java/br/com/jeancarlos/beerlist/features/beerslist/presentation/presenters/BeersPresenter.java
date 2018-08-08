@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import br.com.jeancarlos.beerlist.base.BaseView;
 import br.com.jeancarlos.beerlist.data.BeersDataSource;
+import br.com.jeancarlos.beerlist.di.scopes.PearActivity;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.usecases.GetAllBeersUseCase;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.usecases.GetBeerByNameUseCase;
@@ -22,6 +24,7 @@ import br.com.jeancarlos.beerlist.features.beerslist.presentation.ui.MainActivit
  * @since 5/10/17
  */
 
+@PearActivity
 public class BeersPresenter implements BeersListContract.Presenter {
 
     private GetAllBeersUseCase mGetAllBeersUserCase;
@@ -29,17 +32,18 @@ public class BeersPresenter implements BeersListContract.Presenter {
     private BeersListContract.View mView;
 
     @Inject
-    BeersPresenter(GetAllBeersUseCase getAllBeersUseCase,
-                   GetBeerByNameUseCase getBeerByNameUseCase,
-                   BeersListContract.View view) {
+    BeersPresenter(
+            GetAllBeersUseCase getAllBeersUseCase,
+            GetBeerByNameUseCase getBeerByNameUseCase
+    ) {
         mGetAllBeersUserCase = getAllBeersUseCase;
         mGetBeersByNameUserCase = getBeerByNameUseCase;
-        mView = view;
     }
 
 
     @Override
-    public void start() {
+    public void start(BaseView view) {
+        mView = (BeersListContract.View) view;
         mView.setLoadingIndicator(true);
 
         mGetAllBeersUserCase.executeUseCase(new BeersDataSource.FetchBeersCallback() {

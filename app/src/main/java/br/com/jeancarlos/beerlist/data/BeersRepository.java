@@ -6,9 +6,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import br.com.jeancarlos.beerlist.di.scopes.Local;
+import br.com.jeancarlos.beerlist.di.scopes.Remote;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
-import br.com.jeancarlos.beerlist.injection.scopes.Local;
-import br.com.jeancarlos.beerlist.injection.scopes.Remote;
 
 /**
  * Concrete implementation of a {@link BeersDataSource} as a {@link Beer} repository.

@@ -2,6 +2,8 @@ package br.com.jeancarlos.beerlist.features.favorites.domain;
 
 import android.support.annotation.NonNull;
 
+import javax.inject.Inject;
+
 import br.com.jeancarlos.beerlist.data.BeersDataSource;
 import br.com.jeancarlos.beerlist.data.BeersRepository;
 
@@ -15,6 +17,7 @@ import br.com.jeancarlos.beerlist.data.BeersRepository;
 public class ShowFavoritesUseCase {
     private BeersRepository mBeersRepository;
 
+    @Inject
     public ShowFavoritesUseCase(@NonNull BeersRepository beersRepository) {
         this.mBeersRepository = beersRepository;
     }

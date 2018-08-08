@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist.injection.scopes;
+package br.com.jeancarlos.beerlist.di.scopes;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

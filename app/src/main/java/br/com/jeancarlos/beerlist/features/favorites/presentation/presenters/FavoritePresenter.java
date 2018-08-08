@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import br.com.jeancarlos.beerlist.base.BaseView;
 import br.com.jeancarlos.beerlist.data.BeersDataSource;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import br.com.jeancarlos.beerlist.features.favorites.domain.ShowFavoritesUseCase;
@@ -20,17 +21,17 @@ import br.com.jeancarlos.beerlist.features.favorites.presentation.ui.FavoritesAc
 
 public class FavoritePresenter implements FavoritesContract.Presenter {
     private final ShowFavoritesUseCase mShowFavoriteUseCase;
-    private final FavoritesContract.View mView;
+    private FavoritesContract.View mView;
 
     @Inject
-    public FavoritePresenter(ShowFavoritesUseCase showFavoritesUseCase,
-                             FavoritesContract.View view) {
+    public FavoritePresenter(ShowFavoritesUseCase showFavoritesUseCase) {
         this.mShowFavoriteUseCase = showFavoritesUseCase;
-        this.mView = view;
     }
 
     @Override
-    public void start() {
+    public void start(BaseView view) {
+        mView = (FavoritesContract.View) view;
+
         mShowFavoriteUseCase.executeUseCase(new BeersDataSource.FavoriteBeersCallback() {
             @Override
             public void onFavoriteBeersFetched(List<Beer> favoriteBeers) {

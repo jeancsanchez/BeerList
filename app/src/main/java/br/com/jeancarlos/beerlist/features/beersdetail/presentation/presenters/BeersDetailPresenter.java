@@ -2,6 +2,8 @@ package br.com.jeancarlos.beerlist.features.beersdetail.presentation.presenters;
 
 import javax.inject.Inject;
 
+import br.com.jeancarlos.beerlist.base.BaseView;
+import br.com.jeancarlos.beerlist.di.scopes.PearActivity;
 import br.com.jeancarlos.beerlist.features.beersdetail.domain.DisfavorUseCase;
 import br.com.jeancarlos.beerlist.features.beersdetail.domain.FavoriteUseCase;
 import br.com.jeancarlos.beerlist.features.beersdetail.presentation.BeersDetailContract;
@@ -16,25 +18,24 @@ import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
  * @since 5/16/17
  */
 
+@PearActivity
 public class BeersDetailPresenter implements BeersDetailContract.Presenter {
 
 
     private final FavoriteUseCase mFavoriteUseCase;
     private final DisfavorUseCase mDisfavorUseCase;
-    private final BeersDetailContract.View mView;
+    private BeersDetailContract.View mView;
 
     @Inject
-    BeersDetailPresenter(FavoriteUseCase favoriteUseCase,
-                         DisfavorUseCase disfavorUseCase,
-                         BeersDetailContract.View view) {
+    BeersDetailPresenter(FavoriteUseCase favoriteUseCase, DisfavorUseCase disfavorUseCase) {
         this.mFavoriteUseCase = favoriteUseCase;
         this.mDisfavorUseCase = disfavorUseCase;
-        this.mView = view;
     }
 
 
     @Override
-    public void start() {
+    public void start(BaseView view) {
+        mView = (BeersDetailContract.View) view;
         mView.showBeerDetails();
     }
 

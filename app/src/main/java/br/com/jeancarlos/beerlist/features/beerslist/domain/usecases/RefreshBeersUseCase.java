@@ -2,6 +2,8 @@ package br.com.jeancarlos.beerlist.features.beerslist.domain.usecases;
 
 import android.support.annotation.NonNull;
 
+import javax.inject.Inject;
+
 import br.com.jeancarlos.beerlist.data.BeersDataSource;
 import br.com.jeancarlos.beerlist.data.BeersRepository;
 
@@ -15,6 +17,7 @@ import br.com.jeancarlos.beerlist.data.BeersRepository;
 public class RefreshBeersUseCase {
     private BeersRepository mBeersRepository;
 
+    @Inject
     public RefreshBeersUseCase(@NonNull BeersRepository beersRepository) {
         this.mBeersRepository = beersRepository;
     }

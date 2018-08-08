@@ -23,15 +23,11 @@ import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.base.BaseActivity;
 import br.com.jeancarlos.beerlist.features.beersdetail.presentation.ui.BeersDetailActivity;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
-import br.com.jeancarlos.beerlist.features.beerslist.domain.usecases.GetAllBeersUseCase;
-import br.com.jeancarlos.beerlist.features.beerslist.domain.usecases.GetBeerByNameUseCase;
 import br.com.jeancarlos.beerlist.features.beerslist.presentation.BeersListContract;
 import br.com.jeancarlos.beerlist.features.beerslist.presentation.adapters.BeerAdapter;
 import br.com.jeancarlos.beerlist.features.beerslist.presentation.helpers.BeerHelper;
 import br.com.jeancarlos.beerlist.features.beerslist.presentation.presenters.BeersPresenter;
 import br.com.jeancarlos.beerlist.features.favorites.presentation.ui.FavoritesActivity;
-import br.com.jeancarlos.beerlist.injection.components.DaggerBeerPresenterComponent;
-import br.com.jeancarlos.beerlist.injection.modules.BeerPresenterModule;
 import br.com.jeancarlos.beerlist.util.NetworkUtil;
 import br.com.jeancarlos.beerlist.util.SuggestionProvider;
 import butterknife.BindView;
@@ -71,27 +67,16 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-        initInjections();
         handleIntent(getIntent());
         createAdapter();
         setupRefresh();
-        mBeersPresenter.start();
+        mBeersPresenter.start(this);
     }
 
-    /**
-     * This method provides all dependencies by Dagger2 injection for this view
-     */
-    private void initInjections() {
-        // Inject the presenter
-        DaggerBeerPresenterComponent.builder()
-                .beerPresenterModule(new BeerPresenterModule(
-                        new GetAllBeersUseCase(App.getBeerRepositoryComponent().provideBeersRepository()),
-                        new GetBeerByNameUseCase(App.getBeerRepositoryComponent().provideBeersRepository()),
-                        this))
-                .build()
-                .inject(this);
+    @Override
+    protected void initInjections() {
+        App.getActivityComponent().inject(this);
     }
-
 
     /**
      * This method initialize the refresh layout
@@ -272,4 +257,5 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
         suggestions.saveRecentQuery(query, null);
     }
+
 }

@@ -14,14 +14,10 @@ import javax.inject.Inject;
 import br.com.jeancarlos.beerlist.App;
 import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.base.BaseActivity;
-import br.com.jeancarlos.beerlist.features.beersdetail.domain.DisfavorUseCase;
-import br.com.jeancarlos.beerlist.features.beersdetail.domain.FavoriteUseCase;
 import br.com.jeancarlos.beerlist.features.beersdetail.presentation.BeersDetailContract;
 import br.com.jeancarlos.beerlist.features.beersdetail.presentation.presenters.BeersDetailPresenter;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import br.com.jeancarlos.beerlist.features.beerslist.presentation.helpers.BeerHelper;
-import br.com.jeancarlos.beerlist.injection.components.DaggerBeersDetailPresenterComponent;
-import br.com.jeancarlos.beerlist.injection.modules.BeersDetailPresenterModule;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -47,6 +43,7 @@ public class BeersDetailActivity extends BaseActivity implements BeersDetailCont
 
     private Beer mBeer;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,28 +54,15 @@ public class BeersDetailActivity extends BaseActivity implements BeersDetailCont
         }
 
         ButterKnife.bind(this);
-        initInjections();
         mBeer = getIntent().getExtras().getParcelable(BeerHelper.KEY_BEER);
-        mBeersDetailPresenter.start();
+        mBeersDetailPresenter.start(this);
     }
 
-    /**
-     * This method provides all dependencies by Dagger2 injection for this view
-     */
-    private void initInjections() {
-        FavoriteUseCase favoriteUseCase =
-                new FavoriteUseCase(App.getBeerRepositoryComponent().provideBeersRepository());
-
-        DisfavorUseCase disfavorUseCase =
-                new DisfavorUseCase(App.getBeerRepositoryComponent().provideBeersRepository());
-
-        // Inject the presenter
-        DaggerBeersDetailPresenterComponent.builder()
-                .beersDetailPresenterModule(new BeersDetailPresenterModule(
-                        favoriteUseCase, disfavorUseCase, this))
-                .build()
-                .inject(this);
+    @Override
+    protected void initInjections() {
+        App.getActivityComponent().inject(this);
     }
+
 
     @Override
     public void showBeerDetails() {

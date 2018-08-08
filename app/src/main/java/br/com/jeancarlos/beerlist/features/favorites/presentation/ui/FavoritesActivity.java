@@ -17,12 +17,9 @@ import br.com.jeancarlos.beerlist.base.BaseView;
 import br.com.jeancarlos.beerlist.features.beersdetail.presentation.ui.BeersDetailActivity;
 import br.com.jeancarlos.beerlist.features.beerslist.domain.model.Beer;
 import br.com.jeancarlos.beerlist.features.beerslist.presentation.helpers.BeerHelper;
-import br.com.jeancarlos.beerlist.features.favorites.domain.ShowFavoritesUseCase;
 import br.com.jeancarlos.beerlist.features.favorites.presentation.FavoritesContract;
 import br.com.jeancarlos.beerlist.features.favorites.presentation.adapters.FavoriteAdapter;
 import br.com.jeancarlos.beerlist.features.favorites.presentation.presenters.FavoritePresenter;
-import br.com.jeancarlos.beerlist.injection.components.DaggerFavoritePresenterComponent;
-import br.com.jeancarlos.beerlist.injection.modules.FavoritePresenterModule;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -36,6 +33,7 @@ public class FavoritesActivity extends BaseActivity implements FavoritesContract
     FavoritePresenter mFavoritePresenter;
 
     private FavoriteAdapter mFavoriteAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,17 +57,9 @@ public class FavoritesActivity extends BaseActivity implements FavoritesContract
         mRecyclerViewFavorites.setAdapter(mFavoriteAdapter);
     }
 
-    /**
-     * This method provides all dependencies by Dagger2 injection for this view
-     */
-    private void initInjections() {
-        // Inject the presenter
-        DaggerFavoritePresenterComponent.builder()
-                .favoritePresenterModule(new FavoritePresenterModule(
-                        new ShowFavoritesUseCase(App.getBeerRepositoryComponent().provideBeersRepository()),
-                        this))
-                .build()
-                .inject(this);
+    @Override
+    protected void initInjections() {
+        App.getActivityComponent().inject(this);
     }
 
     @Override
@@ -94,6 +84,6 @@ public class FavoritesActivity extends BaseActivity implements FavoritesContract
     @Override
     public void onResume() {
         super.onResume();
-        mFavoritePresenter.start();
+        mFavoritePresenter.start(this);
     }
 }

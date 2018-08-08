@@ -12,6 +12,6 @@ public interface BasePresenter {
     /**
      * Starts the presenter
      */
-    void start();
+    void start(BaseView view);
 
 }

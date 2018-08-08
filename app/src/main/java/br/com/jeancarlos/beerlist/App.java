@@ -2,9 +2,10 @@ package br.com.jeancarlos.beerlist;
 
 import android.app.Application;
 
-import br.com.jeancarlos.beerlist.injection.components.BeerRepositoryComponent;
-import br.com.jeancarlos.beerlist.injection.components.DaggerBeerRepositoryComponent;
-import br.com.jeancarlos.beerlist.injection.modules.ApplicationModule;
+import br.com.jeancarlos.beerlist.di.components.ActivityComponent;
+import br.com.jeancarlos.beerlist.di.components.AppComponent;
+import br.com.jeancarlos.beerlist.di.components.DaggerAppComponent;
+import br.com.jeancarlos.beerlist.di.modules.ApplicationModule;
 
 /**
  * This class represents the Application
@@ -14,10 +15,10 @@ import br.com.jeancarlos.beerlist.injection.modules.ApplicationModule;
  */
 
 public class App extends Application {
-    private static BeerRepositoryComponent mBeerRepositoryComponent;
+    private static AppComponent appComponent;
 
-    public static BeerRepositoryComponent getBeerRepositoryComponent() {
-        return mBeerRepositoryComponent;
+    public static ActivityComponent getActivityComponent() {
+        return appComponent.getActivityComponent();
     }
 
     @Override
@@ -27,11 +28,10 @@ public class App extends Application {
     }
 
     private void initDaggerComponents() {
-        mBeerRepositoryComponent = DaggerBeerRepositoryComponent
-                .builder()
-                .applicationModule(new ApplicationModule(getApplicationContext()))
+        appComponent = DaggerAppComponent.builder()
+                .applicationModule(new ApplicationModule(this))
                 .build();
 
-
+        appComponent.inject(this);
     }
 }

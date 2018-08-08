@@ -1,6 +1,8 @@
 package br.com.jeancarlos.beerlist.base;
 
 import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
@@ -14,7 +16,19 @@ import br.com.jeancarlos.beerlist.R;
  * @since 5/10/17.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
+
+
+    /**
+     * This method provides all dependencies by Dagger2 injection for this view
+     */
+    protected abstract void initInjections();
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initInjections();
+    }
 
     /**
      * Get accent color

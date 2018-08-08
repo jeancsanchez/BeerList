@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist.injection.modules;
+package br.com.jeancarlos.beerlist.di.modules;
 
 import android.content.Context;
 
