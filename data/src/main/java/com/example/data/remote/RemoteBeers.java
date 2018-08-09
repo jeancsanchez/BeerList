@@ -1,11 +1,12 @@
 package com.example.data.remote;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.example.data.local.BeerEntity;
 import com.example.domain.BeersDataSource;
 import com.example.domain.models.Beer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,27 +26,32 @@ import retrofit2.Response;
 @Singleton
 public class RemoteBeers implements BeersDataSource {
 
-    private Context context;
     private BeerApi mBeerApi;
 
     @Inject
-    RemoteBeers(@NonNull Context context) {
+    RemoteBeers() {
         mBeerApi = BeerApi.Creator.newRetrofitService();
     }
 
     @Override
     public void fetchBeers(@NonNull final BeersDataSource.FetchBeersCallback callback) {
         mBeerApi.getBeers()
-                .enqueue(new Callback<List<Beer>>() {
+                .enqueue(new Callback<List<BeerEntity>>() {
                     @Override
-                    public void onResponse(Call<List<Beer>> call, Response<List<Beer>> response) {
+                    public void onResponse(Call<List<BeerEntity>> call, Response<List<BeerEntity>> response) {
                         if (response.body() != null) {
-                            callback.onBeersFetched(response.body());
+                            List<Beer> beerList = new ArrayList<>();
+
+                            for (BeerEntity beerEntity : response.body()) {
+                                beerList.add(beerEntity.mapOut());
+                            }
+
+                            callback.onBeersFetched(beerList);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<List<Beer>> call, Throwable t) {
+                    public void onFailure(Call<List<BeerEntity>> call, Throwable t) {
                         callback.onBeersFetchError();
                     }
                 });
@@ -54,16 +60,22 @@ public class RemoteBeers implements BeersDataSource {
     @Override
     public void searchBeerByName(String query, @NonNull final SearchBeerCallback callback) {
         mBeerApi.searchBeerByName(query)
-                .enqueue(new Callback<List<Beer>>() {
+                .enqueue(new Callback<List<BeerEntity>>() {
                     @Override
-                    public void onResponse(Call<List<Beer>> call, Response<List<Beer>> response) {
+                    public void onResponse(Call<List<BeerEntity>> call, Response<List<BeerEntity>> response) {
                         if (response.body() != null) {
-                            callback.onSearchBeerSuccess(response.body());
+                            List<Beer> beerList = new ArrayList<>();
+
+                            for (BeerEntity beerEntity : response.body()) {
+                                beerList.add(beerEntity.mapOut());
+                            }
+
+                            callback.onSearchBeerSuccess(beerList);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<List<Beer>> call, Throwable t) {
+                    public void onFailure(Call<List<BeerEntity>> call, Throwable t) {
                         callback.onSearchBeerFailure();
                     }
                 });

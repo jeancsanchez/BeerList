@@ -26,7 +26,4 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     compile "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
-
-    // FIXME: Remove this
-    compile 'com.squareup.retrofit2:converter-gson:2.4.0'
 }

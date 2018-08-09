@@ -1,8 +1,10 @@
 package br.com.jeancarlos.beerlist.di.modules;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.example.data.BeersRepositoryImpl;
+import com.example.data.local.AppDatabase;
 
 import dagger.Module;
 import dagger.Provides;
@@ -26,5 +28,13 @@ public final class ApplicationModule {
     @Provides
     Context provideContext() {
         return mContext;
+    }
+
+    @Provides
+    AppDatabase providesDatabase(Context context) {
+        return Room
+                .databaseBuilder(context.getApplicationContext(), AppDatabase.class, "database-name")
+                .build();
+//        return AppDatabase.createInstance(context);
     }
 }

@@ -20,8 +20,6 @@ import br.com.jeancarlos.beerlist.features.beerslist.FavoriteCallback;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
-
 /**
  * This class represents a item Beer on {@link android.support.v7.widget.RecyclerView}
  *
@@ -131,14 +129,12 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
             holder.mTextViewBeerSubTitle.setText(beerItem.getTagLine());
 
             holder.containerView.setOnClickListener(v -> {
-                checkNotNull(mOnBeerClickListener);
                 mOnBeerClickListener.beerClicked(beerItem);
             });
         }
     }
 
     private void onFavoritesClick(View view) {
-        checkNotNull(mOnFavoritesClickListener);
         mOnFavoritesClickListener.favoritesClicked();
     }
 

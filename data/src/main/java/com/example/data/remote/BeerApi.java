@@ -1,6 +1,6 @@
 package com.example.data.remote;
 
-import com.example.domain.models.Beer;
+import com.example.data.local.BeerEntity;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public interface BeerApi {
      * @see <a href="https://punkapi.com/documentation/v2">API Documentation</a>
      */
     @GET("beers")
-    Call<List<Beer>> getBeers();
+    Call<List<BeerEntity>> getBeers();
 
 
     /**
@@ -39,7 +39,7 @@ public interface BeerApi {
      * @see <a href="https://punkapi.com/documentation/v2">API Documentation</a>
      */
     @GET("beers")
-    Call<List<Beer>> searchBeerByName(@Query("beer_name") String query);
+    Call<List<BeerEntity>> searchBeerByName(@Query("beer_name") String query);
 
 
     /**

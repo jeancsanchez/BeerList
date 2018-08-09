@@ -3,11 +3,6 @@ package com.example.domain.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.annotations.SerializedName;
-
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 /**
  * This class represents a model for Beers
  * <p>
@@ -19,22 +14,14 @@ import io.realm.annotations.PrimaryKey;
  * @since 5/10/17
  */
 
-public class Beer extends RealmObject implements Parcelable {
 
-    @PrimaryKey
+public class Beer implements Parcelable {
+
     private int id;
-
     private String name;
-
-    @SerializedName("tagline")
     private String tagLine;
-
-    @SerializedName("description")
     private String description;
-
-    @SerializedName("image_url")
     private String imageUrl;
-
     private boolean isFavorite;
 
     /**
@@ -72,7 +59,7 @@ public class Beer extends RealmObject implements Parcelable {
         isFavorite = in.readInt() == 1;
     }
 
-    public double getId() {
+    public int getId() {
         return id;
     }
 
@@ -102,6 +89,22 @@ public class Beer extends RealmObject implements Parcelable {
 
     public void setFavorite(boolean favorite) {
         isFavorite = favorite;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTagLine(String tagLine) {
+        this.tagLine = tagLine;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
 

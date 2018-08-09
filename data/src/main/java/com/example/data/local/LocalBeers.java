@@ -1,20 +1,17 @@
 package com.example.data.local;
 
-import android.content.Context;
+import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.example.domain.BeersDataSource;
 import com.example.domain.models.Beer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import io.realm.Realm;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
-import io.realm.Sort;
 
 /**
  * Concrete implementation of a {@link BeersLocalDataSource} and  as a db
@@ -26,42 +23,64 @@ import io.realm.Sort;
 @Singleton
 public class LocalBeers implements BeersDataSource.BeersLocalDataSource {
 
-    private Realm mRealm;
+    private AppDatabase appDatabase;
 
     @Inject
-    LocalBeers(@NonNull Context context) {
-        Realm.init(context);
-        mRealm = Realm.getDefaultInstance();
+    LocalBeers(@NonNull AppDatabase appDatabase) {
+        this.appDatabase = appDatabase;
     }
 
     @Override
-    public void fetchBeers(@NonNull BeersDataSource.FetchBeersCallback callback) {
-        RealmQuery<Beer> query = mRealm.where(Beer.class);
-        RealmResults<Beer> results = query.findAllSorted("name", Sort.ASCENDING);
+    public void fetchBeers(@NonNull final BeersDataSource.FetchBeersCallback callback) {
+        appDatabase.beerDao().getAll().observeForever(new Observer<List<BeerEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<BeerEntity> beersEntities) {
 
-        if (results.size() == 0) {
-            callback.onBeersNotAvailable();
+                if (beersEntities.size() == 0) {
+                    callback.onBeersNotAvailable();
 
-        } else {
-            callback.onBeersFetched(results);
-        }
+                } else {
+                    List<Beer> beers = new ArrayList<>();
+
+                    for (BeerEntity beerEntity : beersEntities) {
+                        beers.add(beerEntity.mapOut());
+                    }
+
+                    callback.onBeersFetched(beers);
+                }
+            }
+        });
+
+
     }
 
     @Override
     public void searchBeerByName(String query, @NonNull SearchBeerCallback callback) {
-        RealmQuery realmQuery = mRealm.where(Beer.class);
-        realmQuery.contains("name", query);
-        RealmResults<Beer> results = realmQuery.findAll();
+        List<BeerEntity> beersEntities =
+                appDatabase.beerDao()
+                        .findByName(query)
+                        .getValue();
 
-        callback.onSearchBeerSuccess(results);
+        if (beersEntities.size() == 0) {
+            callback.onSearchBeerFailure();
+
+        } else {
+            List<Beer> beers = new ArrayList<>();
+
+            for (BeerEntity beerEntity : beersEntities) {
+                beers.add(beerEntity.mapOut());
+            }
+
+            callback.onSearchBeerSuccess(beers);
+        }
     }
 
 
     @Override
     public void saveBeers(List<Beer> beers) {
-        mRealm.beginTransaction();
-        mRealm.insertOrUpdate(beers);
-        mRealm.commitTransaction();
+        for (Beer beer : beers) {
+            insertOrUpdate(beer);
+        }
     }
 
     @Override
@@ -76,15 +95,23 @@ public class LocalBeers implements BeersDataSource.BeersLocalDataSource {
 
     @Override
     public void getFavoriteBeers(FavoriteBeersCallback favoriteBeersCallback) {
-        RealmQuery realmQuery = mRealm.where(Beer.class);
-        realmQuery.equalTo("isFavorite", true);
+        List<BeerEntity> beersEntities =
+                appDatabase.beerDao()
+                        .getFavorites()
+                        .getValue();
 
-        RealmResults<Beer> results = realmQuery.findAllSorted("name", Sort.ASCENDING);
-
-        if (results.size() > 0)
-            favoriteBeersCallback.onFavoriteBeersFetched(results);
-        else
+        if (beersEntities.size() == 0) {
             favoriteBeersCallback.onFavoriteBeersNotFound();
+
+        } else {
+            List<Beer> beers = new ArrayList<>();
+
+            for (BeerEntity beerEntity : beersEntities) {
+                beers.add(beerEntity.mapOut());
+            }
+
+            favoriteBeersCallback.onFavoriteBeersFetched(beers);
+        }
     }
 
     /**
@@ -93,8 +120,6 @@ public class LocalBeers implements BeersDataSource.BeersLocalDataSource {
      * @param beer The beer
      */
     private void insertOrUpdate(Beer beer) {
-        mRealm.beginTransaction();
-        mRealm.insertOrUpdate(beer);
-        mRealm.commitTransaction();
+        appDatabase.beerDao().insertAll(BeerEntity.mapIn(beer));
     }
 }
