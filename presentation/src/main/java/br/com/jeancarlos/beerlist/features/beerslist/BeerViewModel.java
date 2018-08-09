@@ -24,8 +24,8 @@ import br.com.jeancarlos.beerlist.App;
 
 public class BeerViewModel extends ViewModel {
 
-    public MutableLiveData<List<Beer>> mBeers;
-    public MutableLiveData<Boolean> error;
+    public MutableLiveData<List<Beer>> mBeers = new MutableLiveData<>();
+    public MutableLiveData<Boolean> error = new MutableLiveData<>();
 
     @Inject
     GetAllBeersUseCase mGetAllBeersUserCase;
@@ -37,30 +37,23 @@ public class BeerViewModel extends ViewModel {
         App.getViewModelComponent().inject(this);
     }
 
-    public MutableLiveData<List<Beer>> getBeers() {
-        if (mBeers == null) {
-            error = new MutableLiveData<>();
-            mBeers = new MutableLiveData<>();
+    public void getBeers() {
+        mGetAllBeersUserCase.executeUseCase(new BeersDataSource.FetchBeersCallback() {
+            @Override
+            public void onBeersFetched(List<Beer> beers) {
+                error.setValue(false);
+                mBeers.setValue(beers);
+            }
 
-            mGetAllBeersUserCase.executeUseCase(new BeersDataSource.FetchBeersCallback() {
-                @Override
-                public void onBeersFetched(List<Beer> beers) {
-                    error.setValue(false);
-                    mBeers.setValue(beers);
-                }
+            @Override
+            public void onBeersNotAvailable() {
+            }
 
-                @Override
-                public void onBeersNotAvailable() {
-                }
-
-                @Override
-                public void onBeersFetchError() {
-                    error.setValue(true);
-                }
-            });
-        }
-
-        return mBeers;
+            @Override
+            public void onBeersFetchError() {
+                error.setValue(true);
+            }
+        });
     }
 
     public void refreshBeers() {
