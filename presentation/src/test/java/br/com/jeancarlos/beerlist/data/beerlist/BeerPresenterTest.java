@@ -17,14 +17,13 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.jeancarlos.beerlist.features.beerslist.BeerViewModel;
-import br.com.jeancarlos.beerlist.features.beerslist.BeersPresenter;
+import br.com.jeancarlos.beerlist.features.BeerViewModel;
 
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 /**
- * This class makes tests for {@link BeersPresenter}
+ * This class makes tests for {@link BeerViewModel}
  *
  * @author Jean Carlos
  * @since 5/15/17

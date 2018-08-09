@@ -1,4 +1,4 @@
-package br.com.jeancarlos.beerlist.features.beerslist;
+package br.com.jeancarlos.beerlist.features;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;

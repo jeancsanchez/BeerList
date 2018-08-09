@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.domain.models.Beer;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -15,8 +16,7 @@ import java.util.List;
 
 import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.base.BaseView.OnBeerItemClickedListener;
-import com.example.domain.models.Beer;
-import br.com.jeancarlos.beerlist.features.beerslist.BeersListContract.View.OnFavoritesItemClickedListener;
+import br.com.jeancarlos.beerlist.features.beerslist.FavoriteCallback;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -34,7 +34,7 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
     private List<Beer> mBeersList;
     private List<Beer> mOriginalListFilter = new ArrayList<>();
     private OnBeerItemClickedListener mOnBeerClickListener;
-    private OnFavoritesItemClickedListener mOnFavoritesClickListener;
+    private FavoriteCallback mOnFavoritesClickListener;
     private boolean mCanShowFavoritesItem;
 
 
@@ -99,7 +99,7 @@ public class BeerAdapter extends RecyclerView.Adapter<BeerAdapter.BeerViewHolder
      *
      * @param onFavoritesItemClickedListener A callback listener for handle the favorites item click
      */
-    public void setOnFavoritesItemClickedListener(OnFavoritesItemClickedListener onFavoritesItemClickedListener) {
+    public void setOnFavoritesItemClickedListener(FavoriteCallback onFavoritesItemClickedListener) {
         this.mOnFavoritesClickListener = onFavoritesItemClickedListener;
     }
 

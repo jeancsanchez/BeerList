@@ -1,6 +1,6 @@
 package br.com.jeancarlos.beerlist.di.components;
 
-import br.com.jeancarlos.beerlist.features.beerslist.BeerViewModel;
+import br.com.jeancarlos.beerlist.features.BeerViewModel;
 import dagger.Subcomponent;
 
 /**

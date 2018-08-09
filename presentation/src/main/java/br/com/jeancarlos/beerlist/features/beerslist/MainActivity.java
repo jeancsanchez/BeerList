@@ -22,6 +22,8 @@ import java.util.List;
 import br.com.jeancarlos.beerlist.App;
 import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.base.BaseActivity;
+import br.com.jeancarlos.beerlist.base.BaseView;
+import br.com.jeancarlos.beerlist.features.BeerViewModel;
 import br.com.jeancarlos.beerlist.features.beersdetail.BeersDetailActivity;
 import br.com.jeancarlos.beerlist.features.beerslist.adapters.BeerAdapter;
 import br.com.jeancarlos.beerlist.features.beerslist.helpers.BeerHelper;
@@ -33,14 +35,13 @@ import butterknife.ButterKnife;
 
 /**
  * This is the main screen (Activity) on the application. This class also implements
- * the {@link BeersListContract}.
+ * the {@link FavoriteCallback}.
  * <p>
  * All visual elements related to the beers listing are here.
  * </p>
  */
-public class MainActivity extends BaseActivity implements BeersListContract.View,
-        BeersListContract.View.OnBeerItemClickedListener, SearchView.OnQueryTextListener,
-        BeersListContract.View.OnFavoritesItemClickedListener {
+public class MainActivity extends BaseActivity implements
+        BaseView.OnBeerItemClickedListener, SearchView.OnQueryTextListener, FavoriteCallback {
 
     @BindView(R.id.recycler_view_beers)
     RecyclerView mRecyclerViewBeers;
@@ -113,7 +114,6 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     }
 
 
-    @Override
     public void setLoadingIndicator(boolean active) {
         // Hides message data not found error to show progress
         if (active) {
@@ -127,7 +127,6 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
         mSwipeRefresh.setRefreshing(active);
     }
 
-    @Override
     public void showBeers(List<Beer> beers) {
         mBeerAdapter.setupBeers(beers);
 
@@ -136,13 +135,11 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
         }
     }
 
-    @Override
     public void onBeersUpdate(List<Beer> beers) {
         mBeerAdapter.updateList(beers);
         showDataNotAvailable();
     }
 
-    @Override
     public void showBeersSearchResult(List<Beer> beers) {
         mBeerAdapter.canShowFavoritesItem(false);
         mBeerAdapter.updateFilterList(beers);
@@ -164,7 +161,6 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
      * Shows a {@link Snackbar} alerting the user that the data maybe is out of the date, because there is a
      * error of connection with the server
      */
-    @Override
     public void showConnectionFailedError() {
         if (!NetworkUtil.hasNetworkConnection(this)) {
             Snackbar.make(
@@ -178,7 +174,6 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     /**
      * Displays a message indicating that there is no data available
      */
-    @Override
     public void showDataNotAvailable() {
         if (mBeerAdapter.getItemCount() == 0) {
             mLinearMessageNotFound.setVisibility(View.VISIBLE);
