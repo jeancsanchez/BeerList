@@ -47,43 +47,40 @@ dependencies {
     compile project(path: ':data')
 
     // Support
-    compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
-    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
-    compile "com.android.support:design:$rootProject.ext.supportVersion"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
+    implementation "com.android.support:design:$rootProject.ext.supportVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 
     // Butter Knife
-    compile "com.jakewharton:butterknife:$rootProject.ext.butterKnifeVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.ext.butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKnifeVersion"
 
     // Dagger2
-    compile "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
-    compile "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
+    implementation "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
 
     // Others
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    def lifecycle_version = "1.1.1"
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation "android.arch.lifecycle:viewmodel:$lifecycle_version"
+    implementation "android.arch.lifecycle:livedata:$lifecycle_version"
 
     // Tests
     // Dependencies for local unit tests
-    testCompile "junit:junit:$rootProject.ext.junitVersion"
-    testCompile "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
-    testCompile "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
-    testCompile "org.powermock:powermock-module-junit4:$rootProject.ext.powerMockito"
-    testCompile "org.powermock:powermock-api-mockito:$rootProject.ext.powerMockito"
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    testImplementation "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
+    testImplementation "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
+    testImplementation "org.powermock:powermock-module-junit4:$rootProject.ext.powerMockito"
+    testImplementation "org.powermock:powermock-api-mockito:$rootProject.ext.powerMockito"
 
     //  Runners and rules
-    androidTestCompile "com.android.support.test:runner:$rootProject.ext.runnerVersion"
-    androidTestCompile "com.android.support.test:rules:$rootProject.ext.rulesVersion"
+    androidTestImplementation "com.android.support.test:runner:$rootProject.ext.runnerVersion"
+    androidTestImplementation "com.android.support.test:rules:$rootProject.ext.rulesVersion"
 
     // Dependencies for Instrumental tests
-    androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
-    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion"
-
-    // Resolve conflicts between main and test APK:
-    androidTestCompile "com.android.support:support-annotations:$rootProject.supportVersion"
-    androidTestCompile "com.android.support:support-v4:$rootProject.supportVersion"
-    androidTestCompile "com.android.support:recyclerview-v7:$rootProject.supportVersion"
-    androidTestCompile "com.android.support:appcompat-v7:$rootProject.supportVersion"
-    androidTestCompile "com.android.support:design:$rootProject.supportVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion"
 }
