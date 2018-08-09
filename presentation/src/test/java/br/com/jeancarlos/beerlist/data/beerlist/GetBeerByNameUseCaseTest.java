@@ -1,6 +1,7 @@
 package br.com.jeancarlos.beerlist.data.beerlist;
 
 import com.example.data.BeersRepositoryImpl;
+import com.example.domain.BeersDataSource;
 import com.example.domain.usecases.GetBeerByNameUseCase;
 
 import org.junit.Before;

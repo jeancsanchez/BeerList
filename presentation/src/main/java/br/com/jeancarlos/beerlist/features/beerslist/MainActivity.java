@@ -1,6 +1,7 @@
 package br.com.jeancarlos.beerlist.features.beerslist;
 
 import android.app.SearchManager;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,16 +15,14 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import java.util.List;
+import com.example.domain.models.Beer;
 
-import javax.inject.Inject;
+import java.util.List;
 
 import br.com.jeancarlos.beerlist.App;
 import br.com.jeancarlos.beerlist.R;
 import br.com.jeancarlos.beerlist.base.BaseActivity;
 import br.com.jeancarlos.beerlist.features.beersdetail.BeersDetailActivity;
-import com.example.domain.models.Beer;
-
 import br.com.jeancarlos.beerlist.features.beerslist.adapters.BeerAdapter;
 import br.com.jeancarlos.beerlist.features.beerslist.helpers.BeerHelper;
 import br.com.jeancarlos.beerlist.features.favorites.FavoritesActivity;
@@ -52,12 +51,9 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
     @BindView(R.id.linear_layout_not_found_error)
     LinearLayout mLinearMessageNotFound;
 
-    @Inject
-    BeersPresenter mBeersPresenter;
-
     private BeerAdapter mBeerAdapter;
-
     private SearchView mSearchView;
+    private BeerViewModel viewModel;
 
 
     @Override
@@ -69,7 +65,24 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
         handleIntent(getIntent());
         createAdapter();
         setupRefresh();
-        mBeersPresenter.start(this);
+
+        viewModel = ViewModelProviders.of(this).get(BeerViewModel.class);
+
+        setLoadingIndicator(true);
+        viewModel.mBeers.observe(this, users -> {
+            showBeers(users);
+            setLoadingIndicator(false);
+        });
+
+        viewModel.error.observe(this, error -> {
+            assert error != null;
+
+            if (error) {
+                showConnectionFailedError();
+            }
+        });
+
+        viewModel.getBeers();
     }
 
     @Override
@@ -82,7 +95,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
      */
     private void setupRefresh() {
         mSwipeRefresh.setColorSchemeColors(getColorPrimary(), getColorPrimaryDark());
-        mSwipeRefresh.setOnRefreshListener(() -> mBeersPresenter.refreshBeers());
+        mSwipeRefresh.setOnRefreshListener(() -> viewModel.refreshBeers());
     }
 
     /**
@@ -202,7 +215,7 @@ public class MainActivity extends BaseActivity implements BeersListContract.View
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        mBeersPresenter.getBeerByName(query);
+        viewModel.getBeerByName(query);
         saveRecentQuery(query);
         showMessageNoDataFoundIfListIsEmpty();
         return true;

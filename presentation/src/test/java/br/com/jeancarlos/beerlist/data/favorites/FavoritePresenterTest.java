@@ -1,5 +1,6 @@
 package br.com.jeancarlos.beerlist.data.favorites;
 
+import com.example.domain.BeersDataSource;
 import com.example.domain.models.Beer;
 import com.example.domain.usecases.ShowFavoritesUseCase;
 
@@ -57,7 +58,7 @@ public class FavoritePresenterTest {
 
     @Test
     public void showAllFavoriteBeers() {
-        mFavoriteBeersPresenter.start();
+//        mFavoriteBeersPresenter.start();
 
         // Executes the use case
         verify(mShowFavoritesUseCase).executeUseCase(mFavoriteBeersCallbackCaptor.capture());

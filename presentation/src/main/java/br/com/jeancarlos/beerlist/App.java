@@ -5,6 +5,7 @@ import android.app.Application;
 import br.com.jeancarlos.beerlist.di.components.ActivityComponent;
 import br.com.jeancarlos.beerlist.di.components.AppComponent;
 import br.com.jeancarlos.beerlist.di.components.DaggerAppComponent;
+import br.com.jeancarlos.beerlist.di.components.ViewModelComponent;
 import br.com.jeancarlos.beerlist.di.modules.ApplicationModule;
 
 /**
@@ -19,6 +20,10 @@ public class App extends Application {
 
     public static ActivityComponent getActivityComponent() {
         return appComponent.getActivityComponent();
+    }
+
+    public static ViewModelComponent getViewModelComponent() {
+        return appComponent.getViewModelComponent();
     }
 
     @Override

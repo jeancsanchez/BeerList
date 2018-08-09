@@ -3,6 +3,7 @@ package br.com.jeancarlos.beerlist.data;
 import com.example.data.BeersRepositoryImpl;
 import com.example.data.local.LocalBeers;
 import com.example.data.remote.RemoteBeers;
+import com.example.domain.BeersDataSource;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -35,13 +37,13 @@ public class BeerRepositoryTest {
     @Mock
     private LocalBeers mLocalBeers;
 
+    @InjectMocks
     private BeersRepositoryImpl mBeersRepositoryImpl;
 
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mBeersRepositoryImpl = new BeersRepositoryImpl(mRemoteBeers, mLocalBeers);
     }
 
 

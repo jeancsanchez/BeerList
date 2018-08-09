@@ -20,4 +20,6 @@ public interface AppComponent {
     void inject(App app);
 
     ActivityComponent getActivityComponent();
+
+    ViewModelComponent getViewModelComponent();
 }
